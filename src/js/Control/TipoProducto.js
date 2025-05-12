@@ -1,4 +1,5 @@
 import DataAccess from "./DataAcces.js";
+import { orden } from "./Orden.js";
 
 class TipoProducto extends DataAccess {
     constructor() {
@@ -7,10 +8,10 @@ class TipoProducto extends DataAccess {
 
     async tipoProductos() {
         try {
-           // const response = await fetch(this.BASE_URL + "tipoproducto", { method: "GET" }); //Peticion a la API servidor
-           const response = await fetch(this.BASE_URL + "tipoproducto.json", { method: "GET" }); //Pruebas
-           
-           const tiposProductos = await response.json();
+            const response = await fetch(this.BASE_URL + "tipoproducto", { method: "GET" }); //Peticion a la API servidor
+            // const response = await fetch(this.BASE_URL + "tipoproducto.json", { method: "GET" }); //Pruebas
+
+            const tiposProductos = await response.json();
             this.displayTipoProductos(tiposProductos); //Estructura la vista del DOM
             return tiposProductos;
         } catch (error) {
@@ -21,8 +22,10 @@ class TipoProducto extends DataAccess {
 
     //Metodo para estructurar las vista en el DOM
     displayTipoProductos(tipoProductos) {
+    
         //Contenedor principal con los tipos y productos
         const tipoProductoContainer = document.getElementById('tp-container');
+        
         tipoProductos.forEach(tipo => {
             //Boton estilo card que muestra el tipo de Producto que se desea seleccionar
             const tpCard = document.createElement('button');
@@ -46,23 +49,42 @@ class TipoProducto extends DataAccess {
             productosContainer.appendChild(detallesContainer); //segundo
             tipoProductoContainer.appendChild(productosContainer); //Completo el DOM
         });
+        //Boton para confirmar la orden
+        const confirmarBtn = document.createElement('button');
+        confirmarBtn.id = 'confirmar-orden';
+        confirmarBtn.className = 'btn-confirmar';
+        confirmarBtn.textContent = 'Confirmar Orden';
+        tipoProductoContainer.appendChild(confirmarBtn);
     }
 
     //Obtencion y estructuracion de los productos segun el tipo selecionado
     async productosByTipo(idTipoProducto) {
         try {
-          //  const response = await fetch(this.BASE_URL + `producto/tipoproducto/${idTipoProducto}`, { method: "GET" }); //Peticion
-          const response = await fetch(this.BASE_URL + "producto.json", { method: "GET" }); //Peticion para pruebas
+            const response = await fetch(this.BASE_URL + `producto/tipoproducto/${idTipoProducto}`, { method: "GET" }); //Peticion
+            // const response = await fetch(this.BASE_URL + "producto.json", { method: "GET" }); //Peticion para pruebas
             if (response.ok) {
                 const productos = await response.json();
                 const detalleContainer = document.getElementById(`detalles-${idTipoProducto}`);
                 if (productos && productos.length > 0) {
                     detalleContainer.innerHTML = productos.map(p => `
-                        <div class="producto-item">
+                        <div class="producto-item" data-producto='${JSON.stringify({
+                        id_producto: p.idProducto,
+                        nombre: p.nombre,
+                        precioActual: p.precioActual
+                    })}'>
                             <h3>${p.nombre}</h3>
                             <h5>Precio c/u: $${p.precioActual}</h5>
+                            <button class="btn-agregar">Agregar a la orden</button>
                         </div>
                     `).join('');
+
+                    detalleContainer.querySelectorAll('.btn-agregar').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const productoItem = e.target.closest('.producto-item');
+                            const productoData = JSON.parse(productoItem.dataset.producto);
+                            orden.agregarProducto(productoData);
+                        });
+                    });
                 } else {
                     detalleContainer.innerHTML = '<p class="info">No hay productos en esta categoría</p>';
                 }
@@ -87,4 +109,18 @@ class TipoProducto extends DataAccess {
 document.addEventListener('DOMContentLoaded', () => {
     const tProducto = new TipoProducto();
     tProducto.tipoProductos();
+
+
+    // Manejar el evento de confirmación de orden
+    document.addEventListener('click', (e) => {
+        if (e.target && e.target.id === 'confirmar-orden') {
+            orden.confirmarOrden().then(result => {
+                if (result.success) {
+                    alert("Orden confirmada con éxito!");
+                } else {
+                    alert("Error al confirmar la orden: " + result.message);
+                }
+            });
+        }
+    });
 });
