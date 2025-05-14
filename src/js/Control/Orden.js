@@ -7,12 +7,58 @@ class Orden extends DataAccess {
             productos: [],
             sucursal: 'TEST' // Valor por defecto
         };
+        this.ordenActiva = false; // Estado para controlar si la orden está activa
     }
 
-    //verifica si ya existe el producto y si lo vuelve a seleccionar aumenta la cantidad
-    agregarProducto(producto) {
-        const productoExistente = this.ordenActual.productos.find(item =>  
-            item.id_producto === producto.idProducto,
+    // Inicia una nueva orden
+    ordenInit() {
+        this.ordenActiva = true;
+        this.ordenActual = {
+            productos: [],
+            sucursal: 'TEST'
+        };
+        this.actualizarEstadoOrden();
+    }
+
+    // Cancela la orden
+    cancelarOrden() {
+        this.ordenActiva = false;
+        this.ordenActual = {
+            productos: [],
+            sucursal: 'TEST'
+        };
+        this.actualizarEstadoOrden();
+    }
+
+
+    // Método para actualizar según el estado de la orden
+    actualizarEstadoOrden() {
+        const confirmarBtn = document.getElementById('confirmar-orden'); // #BOTON4 de tp
+        const crearOrdenBtn = document.getElementById('crear-orden'); //BOTON1 de tp
+        const cancelarOrdenBtn = document.getElementById('cancelar-orden'); //BOTON2 de tp
+
+        // Mostrar/ocultar botones según el estado
+        if (crearOrdenBtn) {
+            crearOrdenBtn.style.display = this.ordenActiva ? 'none' : 'block';
+        }
+        if (cancelarOrdenBtn) {
+            cancelarOrdenBtn.style.display = this.ordenActiva ? 'block' : 'none';
+        }
+        if (confirmarBtn) {
+            confirmarBtn.style.display = 
+                this.ordenActiva && this.ordenActual.productos.length > 0 ? 'block' : 'none';
+        }
+
+        // Actualiza botones de agregar productos segun el estado de la orden
+        document.querySelectorAll('.btn-agregar').forEach(btn => {
+            btn.style.display = this.ordenActiva ? 'block' : 'none';
+        });
+    }
+
+    addProducto(producto) {
+        if (!this.ordenActiva) return; 
+        const productoExistente = this.ordenActual.productos.find(item => 
+            item.id_producto === producto.idProducto
         );
         if (productoExistente) {
             productoExistente.cantidad += 1;
@@ -24,14 +70,16 @@ class Orden extends DataAccess {
                 cantidad: 1
             });
         }
-        total: this.calcularTotal().toFixed(2) 
-
+        
+        //logs ----borrar al hacer el css!!!!!!!!!!!!!!
+        this.calcularTotal().toFixed(2);
+        this.actualizarEstadoOrden();
         console.log("Orden a enviar:", this.ordenActual);
         console.log("Productos en la orden:", this.ordenActual.productos);
         return this.ordenActual;
     }
 
-    calcularTotal() {
+    calcularTotal() { //Para la vista
         const total = this.ordenActual.productos.reduce(
             (total, item) => total + (item.precioUnitario * item.cantidad), 0
         );
@@ -41,18 +89,19 @@ class Orden extends DataAccess {
 
     async confirmarOrden() {
         try {
-            // Enviar la orden como JSON con el encabezado adecuado
+
             const response = await fetch(this.BASE_URL + "orden", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"  // Asegúrate de enviar el encabezado adecuado
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(this.ordenActual) // Convierte el objeto a JSON
+                body: JSON.stringify(this.ordenActual)
             });
     
-            // Revisar la respuesta de la API
             if (response.ok) {
                 console.log("Orden confirmada con éxito");
+                this.ordenActiva = false; //Desactiva la orden despues de ser enviada
+                this.actualizarEstadoOrden();
                 return { success: true, message: "Orden creada exitosamente" };
             } else {
                 console.error("Error al crear la orden:", response.statusText);
@@ -63,7 +112,6 @@ class Orden extends DataAccess {
             return { success: false, message: "Error al crear la orden" };
         }
     }
-    
 }
 
 export const orden = new Orden();
