@@ -58,13 +58,13 @@ class Orden extends DataAccess {
     addProducto(producto) {
         if (!this.ordenActiva) return; 
         const productoExistente = this.ordenActual.productos.find(item => 
-            item.id_producto === producto.idProducto
+            item.idProducto === producto.idProducto
         );
         if (productoExistente) {
             productoExistente.cantidad += 1;
         } else {
             this.ordenActual.productos.push({  
-                idProducto: producto.id_producto,
+                idProducto: producto.idProducto,
                 nombreProducto: producto.nombre,
                 precioUnitario: producto.precioActual,
                 cantidad: 1
