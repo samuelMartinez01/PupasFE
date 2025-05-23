@@ -9,22 +9,37 @@
 </head>
 
 <body>
+
+    <head class="header">
         <h1>PupasSV</h1>
+    </head>
+
     <div id="main-container">
         <sucursal-pupas sucursalUno="METRO" sucursalDos="ZARZA" sucursalTres="MORA"></sucursal-pupas>
     </div>
 
-    <div id="pagos" class="seccion-pagos"  style="display: none;">
+    <div id="pagos" class="seccion-pagos" style="display: none;">
         <h2>Gestión de pagos</h2>
         <btn-basic action="regresar" text="Atras" class="btn-regresar"></btn-basic>
-
         <metodos-pagos></metodos-pagos>
-        
     </div>
+
+    <div id="orden-container" class="orden-container">
+        <h2>Orden</h2>
+        <div id="productos-orden" class="productos-orden"></div>
+        <div id="total-orden" class="total-orden"></div>
+        <tpi-orden></tpi-orden>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 PupasSV. Todos los derechos reservados.</p>
+    </footer>
+
     <script type="module" src="../js/Control/Main.js"></script>
     <script src="../js/Boundary/SucursalesPupas.js"></script>
     <script src="../js/Boundary/BtnBasic.js"></script>
     <script type="module" src="../js/Control/Main.js"></script>
+    <script type="module" src="../js/Boundary/OrdenElement.js"></script>
 
 
 </body>

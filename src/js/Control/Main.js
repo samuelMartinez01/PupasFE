@@ -2,6 +2,7 @@ import TipoProducto from "./TipoProducto.js";
 import Producto from "./Producto.js";
 import Pago from "./Pago.js";   
 import Combo from "./Combo.js"
+import BotonFactory from "../Boundary/BotonFactory.js";
 import { orden } from "./Orden.js";
 
 class Main {
@@ -31,40 +32,42 @@ class Main {
     }
 
     createBotonesOrden() {
-        // Botón Crear Orden
-        this.crearBtn = document.createElement('button');
-        this.crearBtn.id = 'crear-orden';
-        this.crearBtn.className = 'btn-crear';
-        this.crearBtn.textContent = 'Crear Orden';
+        this.crearBtn = BotonFactory.crearBoton({
+            id: 'crear-orden',
+            clase: 'btn-crear',
+            texto: 'Crear Orden',
+            evento: () => orden.initOrden(),
+            visible: true
+        });
         this.mainContainer.appendChild(this.crearBtn);
-        this.crearBtn.addEventListener('click', () => orden.initOrden());
 
-        // Botón Cancelar Orden
-        this.cancelarBtn = document.createElement('button');
-        this.cancelarBtn.id = 'cancelar-orden';
-        this.cancelarBtn.className = 'btn-cancelar';
-        this.cancelarBtn.textContent = 'Cancelar Orden';
-        this.cancelarBtn.style.display = 'none';
+        this.cancelarBtn = BotonFactory.crearBoton({
+            id: 'cancelar-orden',
+            clase: 'btn-cancelar',
+            texto: 'Cancelar Orden',
+            evento: () => {
+                if (confirm("¿Seguro de que quieres cancelar la orden?")) {
+                    orden.cancelOrden();
+                }
+            },
+            visible: false
+        });
         this.mainContainer.appendChild(this.cancelarBtn);
-        this.cancelarBtn.addEventListener('click', () => {
-            if (confirm("¿Seguro de que quieres cancelar la orden?")) {
-                orden.cancelOrden();
-            }
+    
+        this.pagarBtn = BotonFactory.crearBoton({
+            id: 'pagar-orden',
+            clase: 'pagar-btn',
+            texto: 'Ir a pagar',
+            evento: () => {
+                document.getElementById('main-container').style.display = 'none';
+                document.getElementById('pagos').style.display = 'block';
+                this.Pago.initPago(orden.calcularTotal());
+            },
+            visible: false
         });
-
-        // Botón Confirmar Orden despues del pago
-        this.pagarBtn = document.createElement('button');
-        this.pagarBtn.id = 'pagar-orden';
-        this.pagarBtn.className = 'pagar-btn';
-        this.pagarBtn.textContent = 'Ir a pagar';
-        this.pagarBtn.style.display = 'none';
         this.mainContainer.appendChild(this.pagarBtn);
-        this.pagarBtn.addEventListener('click', () => {
-            document.getElementById('main-container').style.display = 'none';
-            document.getElementById('pagos').style.display = 'block';
-            this.Pago.initPago(orden.calcularTotal());
-        });
     }
+    
 
     showMenu(tiposProductos) {
         tiposProductos.forEach(tipo => {
@@ -74,7 +77,7 @@ class Main {
 
             const productosContainer = document.createElement('div');
             productosContainer.className = 'productos-container';
-            
+
             const detallesContainer = document.createElement('div');
             detallesContainer.className = 'productos-detalle';
             detallesContainer.id = tipo.idTipoProducto === "0" ? 'detalles-combos' : `detalles-${tipo.idTipoProducto}`;

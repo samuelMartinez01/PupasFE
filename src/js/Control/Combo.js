@@ -61,7 +61,6 @@ class Combo extends DataAccess {
                 detallesContainer.appendChild(comboCard);
             });
 
-            // Evento específico para botones de combo
             document.querySelectorAll('.btn-agregar').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     if (!orden.ordenActiva) return;
@@ -73,7 +72,7 @@ class Combo extends DataAccess {
                             nombre: producto.nombre,
                             precioActual: producto.precioUnitario,
                             cantidad: producto.cantidad,
-                            observaciones: `Del combo "${comboData.nombre}"`
+                            observaciones: `De combo "${comboData.nombre}"`
                         };
                         orden.addProducto(productoParaOrden);
                     });
