@@ -1,9 +1,10 @@
 import DataAccess from "./DataAcces.js";
 
-class TipoProductoService extends DataAccess {
-    async obtenerTiposProducto() {
+class TipoProducto extends DataAccess {
+    async getTipoProducto() {
         try {
             const response = await fetch(this.BASE_URL + "tipoproducto", { method: "GET" });
+          // const response = await fetch(this.BASE_URL + "tipoproducto.json", { method: "GET" }); //Pruebas
             const tiposProductos = await response.json();
             return tiposProductos;
         } catch (error) {
@@ -13,4 +14,4 @@ class TipoProductoService extends DataAccess {
     }
 }
 
-export default TipoProductoService; 
+export default TipoProducto; 

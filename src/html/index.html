@@ -1,16 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>PupasSV</title>
 </head>
+
 <body>
-    <h1>PupasSV</h1>
+        <h1>PupasSV</h1>
     <div id="main-container">
+        <sucursal-pupas sucursalUno="METRO" sucursalDos="ZARZA" sucursalTres="MORA"></sucursal-pupas>
     </div>
-<script type="module" src="../js/Control/Main.js"></script>
+
+    <div id="pagos" class="seccion-pagos"  style="display: none;">
+        <h2>Gestión de pagos</h2>
+        <btn-basic action="regresar" text="Atras" class="btn-regresar"></btn-basic>
+
+        <metodos-pagos></metodos-pagos>
+        
+    </div>
+    <script type="module" src="../js/Control/Main.js"></script>
+    <script src="../js/Boundary/SucursalesPupas.js"></script>
+    <script src="../js/Boundary/BtnBasic.js"></script>
+    <script type="module" src="../js/Control/Main.js"></script>
+
 
 </body>
+
 </html>

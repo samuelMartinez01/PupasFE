@@ -28,11 +28,11 @@ class Pago extends DataAccess {
                         <input type="radio" name="metodo-pago" value="${metodo}">
                          ${metodo}</label> `).join('')}
                 </div>
-                <button id="btn-confirmar-pago" class="btn-confirmar">Confirmar Paago</button>
+                <button id="btn-confirmar-pago" class="btn-confirmar">Confirmar Pago</button>
                 <btn-basic action="regresar" text="Atras" class="btn-regresar"></btn-basic>
             `;
-
             const btnConfirmarPago = document.getElementById("btn-confirmar-pago"); 
+
             btnConfirmarPago.addEventListener("click", () => { //Evento para hacer el pago
                 const metodoSeleccionado = document.querySelector('input[name="metodo-pago"]:checked');
                 if (metodoSeleccionado) {
@@ -57,17 +57,13 @@ class Pago extends DataAccess {
 
     async confirmarPago(datosPago) {
         try {
-
             const result = await orden.confirmarOrden();
-            
             if(result.success && result.idOrden) {
                 this.idOrden = result.idOrden;
-
                 const pago = {
                     idOrden: this.idOrden,
                     ...datosPago
                 }
-                
                 const response = await fetch(this.BASE_URL + "pago", {
                     method: "POST",
                     headers: {
@@ -90,7 +86,7 @@ class Pago extends DataAccess {
                         const errorData = await response.text();
                         errorMessage = errorData || errorMessage;
                     } catch (e) {
-                        console.error("Error al leer respuesta de error:", e);
+                        console.error(e);
                     }
                     console.error("Error al confirmar el pago:", errorMessage);
                     alert(`Error: ${errorMessage}`);
@@ -110,9 +106,6 @@ class Pago extends DataAccess {
             const responseOrden = await fetch(this.BASE_URL + `orden/${this.idOrden}`, { method: "GET" });
             const orden = await responseOrden.json();
             const total = orden.total;
-
-
-
             const response = await fetch(`${this.BASE_URL}pago/${idPagoCreado}/detalle`, {
                 method: "POST",
                 headers: {
@@ -127,18 +120,6 @@ class Pago extends DataAccess {
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(errorText || "Error al crear el detalle");
-            }
-    
-            if (response.status === 201) {
-                const location = response.headers.get('Location');
-                console.log("Detalle creado. Location:", location);
-                return { success: true, location };
-            }
-    
-            try {
-                return await response.json();
-            } catch {
-                return { success: true };
             }
     
         } catch (error) {

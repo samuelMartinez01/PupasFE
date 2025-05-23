@@ -1,14 +1,15 @@
 import { orden } from "./Orden.js";
 import DataAccess from "./DataAcces.js";
 
-class ProductoService extends DataAccess {
+class Producto extends DataAccess {
     constructor() {
         super();
     }
     async getProductos(idTipoProducto) {
         try {
             const response = await fetch(this.BASE_URL + `producto/tipoproducto/${idTipoProducto}`, { method: "GET" });
-            if (response.ok){
+        //   const response = await fetch(this.BASE_URL + "producto.json", { method: "GET" }); //Peticion para pruebas 
+           if (response.ok){
                 const productos = await response.json();
                 return productos;
             } else {
@@ -60,9 +61,12 @@ class ProductoService extends DataAccess {
     }
 
     toggleDetalles(idTipoProducto) {
-        const contenedor = document.getElementById(`detalles-${idTipoProducto}`);
+        const idContenedor = idTipoProducto === "0" ? 'detalles-combos' : `detalles-${idTipoProducto}`;
+        const contenedor = document.getElementById(idContenedor);
         contenedor.style.display = contenedor.style.display === 'none' ? 'block' : 'none';
     }
+
+    
 }
 
-export default ProductoService;
+export default Producto;
