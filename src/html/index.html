@@ -15,7 +15,6 @@
     </head>
 
     <div id="main-container">
-        <sucursal-pupas sucursalUno="METRO" sucursalDos="ZARZA" sucursalTres="MORA"></sucursal-pupas>
     </div>
 
     <div id="pagos" class="seccion-pagos" style="display: none;">
@@ -24,12 +23,7 @@
         <metodos-pagos></metodos-pagos>
     </div>
 
-    <div id="orden-container" class="orden-container">
-        <h2>Orden</h2>
-        <div id="productos-orden" class="productos-orden"></div>
-        <div id="total-orden" class="total-orden"></div>
-        <tpi-orden></tpi-orden>
-    </div>
+    <carrito-orden></carrito-orden>
 
     <footer class="footer">
         <p>&copy; 2025 PupasSV. Todos los derechos reservados.</p>
@@ -39,7 +33,6 @@
     <script src="../js/Boundary/SucursalesPupas.js"></script>
     <script src="../js/Boundary/BtnBasic.js"></script>
     <script type="module" src="../js/Control/Main.js"></script>
-    <script type="module" src="../js/Boundary/OrdenElement.js"></script>
 
 
 </body>

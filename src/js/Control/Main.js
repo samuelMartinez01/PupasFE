@@ -4,6 +4,7 @@ import Pago from "./Pago.js";
 import Combo from "./Combo.js"
 import BotonFactory from "../Boundary/BotonFactory.js";
 import { orden } from "./Orden.js";
+import '../Boundary/OrdenElement.js'
 
 class Main {
     constructor(containerId) {
@@ -86,19 +87,27 @@ class Main {
             //Evento que despliega los productos segun el tipo
             tipoProductoCard.addEventListener('click', async () => {
                 try {
-                    if (tipo.idTipoProducto === "0") {
-                        await this.combo.showCombos();
-                        this.producto.toggleDetalles(tipo.idTipoProducto);
-                    } else {
-                        const productos = await this.producto.getProductos(tipo.idTipoProducto);
-                        this.producto.showProductos(productos, tipo.idTipoProducto);
-                        this.producto.toggleDetalles(tipo.idTipoProducto);
+                    const idContenedor = tipo.idTipoProducto === "0" ? 'detalles-combos': `detalles-${tipo.idTipoProducto}`;
+                    const contenedorActual = document.getElementById(idContenedor);
+                    const estaVisible = contenedorActual.style.display === 'block';
+          
+                    document.querySelectorAll('.productos-detalle').forEach(detalle => {
+                        detalle.style.display = 'none';
+                    });
+
+                    if (!estaVisible) {
+                        if (tipo.idTipoProducto === "0") {
+                            await this.combo.showCombos();
+                        } else {
+                            const productos = await this.producto.getProductos(tipo.idTipoProducto);
+                            this.producto.showProductos(productos, tipo.idTipoProducto);
+                        }
+                        contenedorActual.style.display = 'block';
                     }
                 } catch (error) {
                     console.error(`Error al cargar ${tipo.nombre}:`, error);
                 }
             });
-
             productosContainer.appendChild(tipoProductoCard);
             productosContainer.appendChild(detallesContainer);
             this.mainContainer.appendChild(productosContainer);

@@ -60,12 +60,13 @@ class Producto extends DataAccess {
         });
     }
 
-    toggleDetalles(idTipoProducto) {
+    mostrarDetalles(idTipoProducto) {
         const idContenedor = idTipoProducto === "0" ? 'detalles-combos' : `detalles-${idTipoProducto}`;
         const contenedor = document.getElementById(idContenedor);
         contenedor.style.display = contenedor.style.display === 'none' ? 'block' : 'none';
     }
 
+    
     
 }
 

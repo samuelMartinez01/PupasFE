@@ -4,23 +4,24 @@ class Orden extends DataAccess {
     constructor() {
         super();
         this.ordenActiva = false;
-    }
-
-    initOrden() {
-        this.ordenActiva = true;
+        this.onChange = null;
         this.ordenActual = {
             productos: [],
             sucursal: 'TPI'
         };
-        this.vistaOrden();
+    }
+
+    initOrden() {
+        this.ordenActiva = true;
         this.estadoOrden();
+      this.notificarCambio();
     }
 
     cancelOrden() {
         this.ordenActiva = false;
         this.ordenActual = { productos: []};
-        this.vistaOrden();
         this.estadoOrden();
+        this.notificarCambio();
     }
 
     estadoOrden() {
@@ -71,70 +72,16 @@ class Orden extends DataAccess {
             });
 
         }
-        this.vistaOrden();
         this.estadoOrden();
+        this.notificarCambio();
         return this.ordenActual;
     }
 
-    vistaOrden() {
-        const productosOrdenContainer = document.getElementById('productos-orden');
-        const totalOrdenContainer = document.getElementById('total-orden');
-        if (productosOrdenContainer || totalOrdenContainer) {
-            productosOrdenContainer.innerHTML = '';
-            this.ordenActual.productos.forEach(p => {
-                const pi = document.createElement('div');
-                pi.className = 'producto-i';
-                pi.innerHTML = `
-                 <span>${p.nombreProducto}   </span>
-                 <button class="btn-menos" data-id="${p.idProducto}">-</button>
-                 <span class="cantidad"> ${p.cantidad} </span>
-                 <button class="btn-mas" data-id="${p.idProducto}">+</button>
-                  </div>
-                <span class="producto-subtotal">$${(p.precioUnitario * p.cantidad).toFixed(2)}</span>
-            </div>`;
-                productosOrdenContainer.appendChild(pi);
-            });
-            const total = this.calcularTotal().toFixed(2);
-            totalOrdenContainer.textContent = `Total a pagar: $${total}`;
-        } else {
-            return;
+    
+    notificarCambio() {
+        if(this.onChange && typeof this.onChange === 'function') {
+            this.onChange();
         }
-
-        productosOrdenContainer.querySelectorAll('.btn-mas').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const idProducto = parseInt(e.target.getAttribute('data-id'));
-                this.incrementarProducto(idProducto);
-            });
-        });
-        
-        productosOrdenContainer.querySelectorAll('.btn-menos').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const idProducto = parseInt(e.target.getAttribute('data-id'));
-                this.decrementarProducto(idProducto);
-            });
-        });
-        
-    }
-
-    incrementarProducto(idProducto) {
-        const producto = this.ordenActual.productos.find(p => p.idProducto === idProducto);
-        if (producto) {
-            producto.cantidad += 1;
-            this.vistaOrden();
-            this.estadoOrden();
-        }
-
-    }
-
-    decrementarProducto(idProducto) {
-        const producto = this.ordenActual.productos.find(p => p.idProducto === idProducto);
-        if (producto && producto.cantidad > 1) {
-            producto.cantidad -= 1;
-        } else {
-            this.ordenActual.productos = this.ordenActual.productos.filter(p => p.idProducto !== idProducto);
-        }
-        this.vistaOrden();
-        this.estadoOrden();
     }
 
 

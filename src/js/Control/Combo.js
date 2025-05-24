@@ -64,7 +64,6 @@ class Combo extends DataAccess {
             document.querySelectorAll('.btn-agregar').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     if (!orden.ordenActiva) return;
-                    
                     const comboData = JSON.parse(e.target.dataset.combo);
                     comboData.productos.forEach(producto => {
                         const productoParaOrden = {
