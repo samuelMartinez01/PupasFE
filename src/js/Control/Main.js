@@ -2,7 +2,6 @@ import TipoProducto from "./TipoProducto.js";
 import Producto from "./Producto.js";
 import Pago from "./Pago.js";   
 import Combo from "./Combo.js"
-import BotonFactory from "../Boundary/BotonFactory.js";
 import { orden } from "./Orden.js";
 import '../Boundary/OrdenElement.js'
 
@@ -33,40 +32,36 @@ class Main {
     }
 
     createBotonesOrden() {
-        this.crearBtn = BotonFactory.crearBoton({
-            id: 'crear-orden',
-            clase: 'btn-crear',
-            texto: 'Crear Orden',
-            evento: () => orden.initOrden(),
-            visible: true
-        });
+        this.crearBtn = document.createElement('button');
+        this.crearBtn.id = 'crear-orden';
+        this.crearBtn.className = 'btn-crear';
+        this.crearBtn.textContent = 'Crear Orden';
         this.mainContainer.appendChild(this.crearBtn);
+        this.crearBtn.addEventListener('click', () => orden.initOrden());
 
-        this.cancelarBtn = BotonFactory.crearBoton({
-            id: 'cancelar-orden',
-            clase: 'btn-cancelar',
-            texto: 'Cancelar Orden',
-            evento: () => {
-                if (confirm("¿Seguro de que quieres cancelar la orden?")) {
-                    orden.cancelOrden();
-                }
-            },
-            visible: false
-        });
+        this.cancelarBtn = document.createElement('button');
+        this.cancelarBtn.id = 'cancelar-orden';
+        this.cancelarBtn.className = 'btn-cancelar';
+        this.cancelarBtn.textContent = 'Cancelar Orden';
+        this.cancelarBtn.style.display = 'none';
         this.mainContainer.appendChild(this.cancelarBtn);
-    
-        this.pagarBtn = BotonFactory.crearBoton({
-            id: 'pagar-orden',
-            clase: 'pagar-btn',
-            texto: 'Ir a pagar',
-            evento: () => {
-                document.getElementById('main-container').style.display = 'none';
-                document.getElementById('pagos').style.display = 'block';
-                this.Pago.initPago(orden.calcularTotal());
-            },
-            visible: false
+        this.cancelarBtn.addEventListener('click', () => {
+            if (confirm("¿Seguro de que quieres cancelar la orden?")) {
+                orden.cancelOrden();
+            }
         });
+
+        this.pagarBtn = document.createElement('button');
+        this.pagarBtn.id = 'pagar-orden';
+        this.pagarBtn.className = 'pagar-btn';
+        this.pagarBtn.textContent = 'Ir a pagar';
+        this.pagarBtn.style.display = 'none';
         this.mainContainer.appendChild(this.pagarBtn);
+        this.pagarBtn.addEventListener('click', () => {
+            document.getElementById('main-container').style.display = 'none';
+            document.getElementById('pagos').style.display = 'block';
+            this.Pago.initPago(orden.calcularTotal());
+        });
     }
     
 
