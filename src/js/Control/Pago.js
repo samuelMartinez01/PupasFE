@@ -79,6 +79,10 @@ class Pago extends DataAccess {
                     await this.createPagoDetalle(idPagoCreado);
                     console.log("Pago y detalle creados con éxito. ID:", idPagoCreado);
                     alert(`Pago Exitoso, su orden ha sido confirmada`);
+                    orden.cancelOrden();
+                    document.getElementById('pagos').style.display = 'none';
+                    document.getElementById('main-container').style.display = 'block';
+
                     
                 } else {
                     let errorMessage = "Error al confirmar el pago";
