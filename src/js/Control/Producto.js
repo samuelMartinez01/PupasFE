@@ -8,7 +8,6 @@ class Producto extends DataAccess {
     async getProductos(idTipoProducto) {
         try {
             const response = await fetch(this.BASE_URL + `producto/tipoproducto/${idTipoProducto}`, { method: "GET" });
-        //   const response = await fetch(this.BASE_URL + "producto.json", { method: "GET" }); //Peticion para pruebas 
            if (response.ok){
                 const productos = await response.json();
                 return productos;
@@ -65,9 +64,6 @@ class Producto extends DataAccess {
         const contenedor = document.getElementById(idContenedor);
         contenedor.style.display = contenedor.style.display === 'none' ? 'block' : 'none';
     }
-
-    
-    
 }
 
 export default Producto;
