@@ -17,18 +17,19 @@ class Main {
     async init() {
         const tiposProductos = await this.tipoProducto.getTipoProducto();
         const combos = await this.combo.getCombo();
+
+        if (!Array.isArray(tiposProductos)) {
+            return;
+        }
+
         const tipos = [
             ...tiposProductos,
-            {idTipoProducto:"0", nombre: "Combos", observaciones:""}
+            { idTipoProducto: "0", nombre: "Combos", observaciones: "" }
         ];
         this.combosData = combos;
 
-        if (tipos) {
-            this.createBotonesOrden();
-            this.showMenu(tipos);
-        } else {
-            return;
-        }
+        this.createBotonesOrden();
+        this.showMenu(tipos);
     }
 
     createBotonesOrden() {
@@ -113,4 +114,7 @@ class Main {
 document.addEventListener('DOMContentLoaded', () => {
     const app = new Main('main-container');
     app.init();
+
 });
+export default Main;
+
