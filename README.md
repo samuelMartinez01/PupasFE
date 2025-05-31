@@ -1,15 +1,10 @@
-sudo apt install npm
+para ejecutar con el yml 
 
-npm install express
+docker compose up --build //levanta
 
+docker compose down //baja
 
-
-
-
-
-
-
-
+con dockerfile
 # 1. Construir la imagen Docker 
 docker build -t pupasv .
 
