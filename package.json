@@ -1,13 +1,13 @@
 {
   "name": "pupasfe",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
+    "start": "node server.js",
     "test": "mocha \"test/**/*.js\""
   },
   "repository": {
@@ -26,5 +26,8 @@
     "mocha": "^11.5.0",
     "node-fetch": "^3.3.2",
     "sinon": "^20.0.0"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }
