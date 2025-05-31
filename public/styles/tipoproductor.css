@@ -1,0 +1,363 @@
+/* ===========================================
+   ESTILOS PARA COMPONENTE TIPO PRODUCTO
+   ========================================== */
+
+/* Contenedor principal de tipos de producto */
+.tipos-productos-section {
+    padding: 2rem 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    margin: 2rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.tipos-productos-section .section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.tipos-productos-section .section-header h2 {
+    color: #2c3e50;
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: slideInDown 0.6s ease-out;
+}
+
+.tipos-productos-section .section-header p {
+    color: #6c757d;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    animation: slideInDown 0.6s ease-out 0.2s both;
+}
+
+/* Contenedor donde tu componente renderizará */
+#tipos-productos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estilos base para cuando tu componente cree elementos */
+.tipo-producto-item {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+/* Animación escalonada para múltiples items */
+.tipo-producto-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.tipo-producto-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.tipo-producto-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.tipo-producto-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.tipo-producto-item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.tipo-producto-item:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+/* Línea decorativa animada */
+.tipo-producto-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    transform-origin: left;
+}
+
+.tipo-producto-item:hover::before {
+    transform: scaleX(1);
+}
+
+/* Efectos hover */
+.tipo-producto-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: rgba(69, 183, 209, 0.3);
+}
+
+.tipo-producto-item:active {
+    transform: translateY(-4px) scale(1.01);
+    transition: all 0.1s ease;
+}
+
+/* Si tu componente usa una clase específica para el nombre */
+.tipo-producto-nombre,
+.tipo-nombre,
+.nombre-tipo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.tipo-producto-item:hover .tipo-producto-nombre,
+.tipo-producto-item:hover .tipo-nombre,
+.tipo-producto-item:hover .nombre-tipo {
+    color: #45b7d1;
+}
+
+/* Descripción del tipo */
+.tipo-producto-descripcion,
+.tipo-descripcion,
+.descripcion-tipo {
+    color: #6c757d;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+.tipo-producto-item:hover .tipo-producto-descripcion,
+.tipo-producto-item:hover .tipo-descripcion,
+.tipo-producto-item:hover .descripcion-tipo {
+    color: #495057;
+}
+
+/* Estados de carga para tu componente */
+.loading-tipos {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #1976d2;
+    font-size: 1.1rem;
+    font-weight: 500;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 12px;
+    margin: 1rem;
+    position: relative;
+}
+
+.loading-tipos::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #1976d2;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Estado de error */
+.error-tipos {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+    color: #d32f2f;
+    border-radius: 12px;
+    margin: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Estado vacío */
+.empty-tipos {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+    color: #f57c00;
+    border-radius: 12px;
+    margin: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Pulso para elementos que necesitan atención */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(69, 183, 209, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(69, 183, 209, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(69, 183, 209, 0);
+    }
+}
+
+.tipo-producto-item.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Layout en grid si quieres mostrar los tipos en rejilla */
+.tipos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Layout en lista si prefieres mostrar los tipos en lista */
+.tipos-list .tipo-producto-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tipos-productos-section {
+        margin: 1rem 0;
+        padding: 1.5rem 0;
+    }
+
+    .tipos-productos-section .section-header h2 {
+        font-size: 1.8rem;
+    }
+
+    .tipo-producto-item {
+        padding: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .tipo-producto-nombre,
+    .tipo-nombre,
+    .nombre-tipo {
+        font-size: 1.2rem;
+    }
+
+    #tipos-productos-container {
+        padding: 0 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tipo-producto-item {
+        padding: 1rem;
+    }
+
+    .tipo-producto-nombre,
+    .tipo-nombre,
+    .nombre-tipo {
+        font-size: 1.1rem;
+    }
+
+    .tipo-producto-descripcion,
+    .tipo-descripcion,
+    .descripcion-tipo {
+        font-size: 0.9rem;
+    }
+}
+
+/* Clases de utilidad para diferentes estilos */
+.tipo-producto-card {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: 2px solid transparent;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideInUp 0.6s ease-out forwards;
+}
+
+.tipo-producto-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border-color: rgba(69, 183, 209, 0.3);
+}
+
+/* Efecto de brillo */
+.tipo-producto-shine {
+    position: relative;
+    overflow: hidden;
+}
+
+.tipo-producto-shine::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    transition: transform 0.6s ease;
+}
+
+.tipo-producto-shine:hover::after {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+}

@@ -1,4 +1,4 @@
-# Usa Node.js oficial
+# Usa Node.js 
 FROM node:20
 
 # Carpeta de trabajo dentro del contenedor
@@ -17,4 +17,5 @@ COPY . .
 EXPOSE 3000
 
 # Comando para arrancar
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "dev" ]
+

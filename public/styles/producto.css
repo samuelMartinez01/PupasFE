@@ -1,0 +1,450 @@
+/* Estilos animados para el componente Producto */
+
+/* Contenedor de detalles de productos */
+.detalles-container {
+    background: linear-gradient(135deg, var(--blanco) 0%, var(--verde-fondo) 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow: 0 8px 30px var(--sombra);
+    border: 2px solid var(--verde-pastel);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInFromBottom 0.6s ease-out forwards;
+}
+
+/* Animación de entrada para contenedor */
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Barra decorativa superior */
+.detalles-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--verde-claro) 0%, var(--verde-muy-claro) 50%, var(--verde-claro) 100%);
+    animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        transform: translateX(-100%);
+    }
+
+    50% {
+        transform: translateX(100%);
+    }
+}
+
+/* Item individual de producto */
+.producto-item {
+    background: linear-gradient(135deg, var(--blanco) 0%, rgba(139, 195, 74, 0.05) 100%);
+    border: 2px solid var(--verde-pastel);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: slideInFromLeft 0.6s ease-out forwards;
+}
+
+/* Animación escalonada para múltiples productos */
+.producto-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.producto-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.producto-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.producto-item:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.producto-item:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.producto-item:nth-child(n+6) {
+    animation-delay: 0.6s;
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Efecto hover para producto */
+.producto-item:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px var(--sombra-hover);
+    border-color: var(--verde-claro);
+    background: linear-gradient(135deg, var(--blanco) 0%, rgba(139, 195, 74, 0.1) 100%);
+}
+
+/* Efecto de brillo en hover */
+.producto-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(139, 195, 74, 0.2), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.producto-item:hover::before {
+    left: 100%;
+}
+
+/* Títulos de producto */
+.producto-item h3 {
+    color: var(--verde-primario);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.producto-item h3::before {
+    content: '🍽️';
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.producto-item:hover h3::before {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.producto-item:hover h3 {
+    color: var(--verde-oscuro);
+    transform: translateX(5px);
+}
+
+/* Precio del producto */
+.producto-item h5 {
+    color: var(--verde-secundario);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 1.5rem 0;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.producto-item h5::before {
+    content: '💰';
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.producto-item:hover h5::before {
+    transform: scale(1.1);
+}
+
+.producto-item:hover h5 {
+    color: var(--verde-claro);
+    transform: translateX(5px);
+}
+
+/* Botón agregar a la orden */
+.btn-agregar {
+    background: linear-gradient(135deg, var(--verde-secundario) 0%, var(--verde-claro) 100%);
+    color: var(--blanco);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(139, 195, 74, 0.3);
+}
+
+.btn-agregar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-agregar:hover::before {
+    left: 100%;
+}
+
+.btn-agregar::after {
+    content: '🛒';
+    transition: transform 0.3s ease;
+}
+
+.btn-agregar:hover {
+    background: linear-gradient(135deg, var(--verde-claro) 0%, var(--verde-muy-claro) 100%);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(139, 195, 74, 0.4);
+}
+
+.btn-agregar:hover::after {
+    transform: scale(1.2) rotate(15deg);
+}
+
+.btn-agregar:active {
+    transform: translateY(-1px) scale(1.02);
+    transition: all 0.1s ease;
+}
+
+/* Click effect */
+.btn-agregar:active::after {
+    animation: clickBounce 0.3s ease;
+}
+
+@keyframes clickBounce {
+    0% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1.5);
+    }
+
+    100% {
+        transform: scale(1.2);
+    }
+}
+
+/* Mensaje informativo cuando no hay productos */
+.info {
+    text-align: center;
+    color: var(--gris-texto);
+    font-size: 1.1rem;
+    font-style: italic;
+    padding: 3rem;
+    background: linear-gradient(135deg, var(--blanco) 0%, rgba(139, 195, 74, 0.05) 100%);
+    border: 2px dashed var(--verde-pastel);
+    border-radius: 15px;
+    position: relative;
+    animation: fadeInScale 0.5s ease-out;
+}
+
+.info::before {
+    content: '📋';
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Animación para mostrar/ocultar contenedor */
+.detalles-container[style*="display: none"] {
+    animation: slideOutToTop 0.4s ease-in forwards;
+}
+
+.detalles-container[style*="display: block"] {
+    animation: slideInFromBottom 0.6s ease-out forwards;
+}
+
+@keyframes slideOutToTop {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+}
+
+/* Loading state */
+.producto-item.loading {
+    opacity: 0.7;
+    pointer-events: none;
+    position: relative;
+}
+
+.producto-item.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(139, 195, 74, 0.3), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .detalles-container {
+        padding: 1.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .producto-item {
+        padding: 1.2rem;
+        margin: 0.8rem 0;
+    }
+
+    .producto-item h3 {
+        font-size: 1.2rem;
+    }
+
+    .producto-item h5 {
+        font-size: 1rem;
+    }
+
+    .btn-agregar {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .detalles-container {
+        padding: 1rem;
+        border-radius: 15px;
+    }
+
+    .producto-item {
+        padding: 1rem;
+    }
+
+    .producto-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .producto-item h5 {
+        font-size: 0.95rem;
+    }
+
+    .btn-agregar {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.85rem;
+    }
+
+    .info {
+        padding: 2rem 1rem;
+        font-size: 1rem;
+    }
+
+    .info::before {
+        font-size: 2.5rem;
+    }
+}
+
+/* Micro-interacciones adicionales */
+.producto-item:focus-within {
+    outline: 3px solid var(--verde-claro);
+    outline-offset: 2px;
+}
+
+/* Animación cuando se agrega producto */
+.producto-item.added {
+    animation: productAdded 0.6s ease-out;
+}
+
+@keyframes productAdded {
+    0% {
+        background: linear-gradient(135deg, var(--blanco) 0%, rgba(139, 195, 74, 0.05) 100%);
+        transform: scale(1);
+    }
+
+    50% {
+        background: linear-gradient(135deg, rgba(139, 195, 74, 0.2) 0%, rgba(139, 195, 74, 0.3) 100%);
+        transform: scale(1.05);
+        box-shadow: 0 20px 50px rgba(139, 195, 74, 0.4);
+    }
+
+    100% {
+        background: linear-gradient(135deg, var(--blanco) 0%, rgba(139, 195, 74, 0.05) 100%);
+        transform: scale(1);
+    }
+}

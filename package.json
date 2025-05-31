@@ -8,7 +8,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "mocha \"test/**/*.js\""
+    "test": "mocha \"test/**/*.js\"",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
     "chai": "^5.2.0",
     "mocha": "^11.5.0",
     "node-fetch": "^3.3.2",
+    "nodemon": "^3.1.10",
     "sinon": "^20.0.0"
   },
   "dependencies": {

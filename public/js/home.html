@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PupusApp</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/botonbackstyles.css">
+    <link rel="stylesheet" href="../styles/combos.css">
+    <link rel="stylesheet" href="../styles/orden.css">
+    <link rel="stylesheet" href="../styles/pago.css">
+    <link rel="stylesheet" href="../styles/producto.css">
+    <link rel="stylesheet" href="../styles/tipoproducto.css">
+    <link rel="stylesheet" href="../styles/cajon.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">🫓 PupusApp</div>
+    </header>
+
+    <!-- Widget flotante de orden -->
+    <div class="orden-widget-flotante">
+        <!-- Estado: Sin orden -->
+        <div id="widget-sin-orden" class="widget-state">
+            <button id="crear-orden" class="btn-crear-orden-flotante" onclick="crearOrden()">
+                🛒 Nueva Orden
+            </button>
+        </div>
+
+        <!-- Estado: Con orden activa -->
+        <div id="widget-con-orden" class="widget-state" style="display: none;">
+            <div class="orden-widget-header">
+                <h3>🛒 Tu Orden</h3>
+                <div class="orden-widget-total">$<span id="widget-total">0.00</span></div>
+            </div>
+
+            <div id="widget-productos" class="orden-widget-productos">
+                <div class="orden-empty">No hay productos</div>
+            </div>
+
+            <div class="orden-widget-controls">
+                <button id="cancelar-orden-widget" class="btn-widget-cancel" onclick="cancelarOrden()">
+                    ❌
+                </button>
+                <button id="confirmar-orden-widget" class="btn-widget-confirm" onclick="confirmarOrden()">
+                    ✓ Confirmar
+                </button>
+                <button id="pagar-orden-widget" class="btn-widget-pay" onclick="iniciarPago()">
+                    💳 Pagar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main class="main">
+        <!-- Bienvenida -->
+        <section class="welcome">
+            <h2>¡Bienvenido a PupusApp!</h2>
+            <p>Las mejores pupusas salvadoreñas directo a tu mesa</p>
+        </section>
+
+        <!-- Combos especiales destacados -->
+        <section class="combos-section">
+            <div class="section-header">
+                <h2>🎯 Combos Especiales</h2>
+                <p>Deliciosas combinaciones a precios increíbles</p>
+            </div>
+            <div id="detalles-combos" class="loading-combos">
+                Cargando combos disponibles...
+            </div>
+        </section>
+
+        <!-- Cajón animado para productos -->
+        <section class="cajon-section">
+            <div class="cajon-trigger" onclick="toggleCajon()">
+                <div class="cajon-header">
+                    <h2>🛍️ Explorar Productos</h2>
+                    <p>Descubre nuestros productos por categoría</p>
+                </div>
+                <div class="cajon-toggle">
+                    <span class="cajon-toggle-text">Abrir cajón</span>
+                    <span class="cajon-toggle-icon">▼</span>
+                </div>
+            </div>
+            <div id="cajon-content" class="cajon-content">
+                <div class="cajon-inner">
+                    <!-- Tipos de producto a la izquierda -->
+                    <div class="cajon-left">
+                        <h3>📋 Categorías</h3>
+                        <div id="tipos-productos-cajon" class="tipos-container">
+                            <div class="loading-tipos-cajon">Cargando categorías...</div>
+                        </div>
+                    </div>
+                    <!-- Productos a la derecha -->
+                    <div class="cajon-right">
+                        <h3 id="productos-titulo">🍽️ Productos</h3>
+                        <div id="productos-list-cajon" class="productos-container">
+                            <div class="select-category-message">
+                                Selecciona una categoría para ver los productos
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de pago -->
+        <section id="pagos" style="display: none;">
+            <!-- UI dinámica de pago -->
+        </section>
+
+        <!-- Mensajes de la orden -->
+        <div id="orden-messages"></div>
+
+        <btn-basic action="regresar" text="Atrás" style="display: none"></btn-basic>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <h3>PupusApp</h3>
+                <p>Sabor auténtico salvadoreño</p>
+            </div>
+            <div>
+                <h3>Contacto</h3>
+                <p>📞 +503 1234-5678</p>
+            </div>
+            <div>
+                <h3>Horarios</h3>
+                <p>8:00 AM - 9:00 PM</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentPage = 'home';
+        let cart = [];
+        let ordenInstance = null;
+        let pagoInstance = null;
+        let productoInstance = null;
+        let tipoProductoInstance = null;
+        let cajonAbierto = false;
+
+        function changePage(page) {
+            currentPage = page;
+            updateContent(page);
+        }
+
+        function updateContent(page) {
+            const title = document.querySelector('.welcome h2');
+            const desc = document.querySelector('.welcome p');
+            switch (page) {
+                case 'home':
+                    title.textContent = '¡Bienvenido a PupusApp!';
+                    desc.textContent = 'Las mejores pupusas salvadoreñas directo a tu mesa';
+                    break;
+                case 'menu':
+                    title.textContent = 'Nuestro Menú';
+                    desc.textContent = 'Deliciosas pupusas tradicionales';
+                    break;
+                case 'cart':
+                    title.textContent = 'Tu Carrito';
+                    desc.textContent = 'Revisa tus pedidos';
+                    break;
+                case 'contact':
+                    title.textContent = 'Contáctanos';
+                    desc.textContent = '¡Estamos aquí para ayudarte!';
+                    break;
+            }
+        }
+
+        function toggleCajon() {
+            const cajonContent = document.getElementById('cajon-content');
+            const toggleIcon = document.querySelector('.cajon-toggle-icon');
+            const toggleText = document.querySelector('.cajon-toggle-text');
+
+            cajonAbierto = !cajonAbierto;
+
+            if (cajonAbierto) {
+                cajonContent.classList.add('open');
+                toggleIcon.textContent = '▲';
+                toggleText.textContent = 'Cerrar cajón';
+            } else {
+                cajonContent.classList.remove('open');
+                toggleIcon.textContent = '▼';
+                toggleText.textContent = 'Abrir cajón';
+            }
+        }
+
+        function crearOrden() {
+            if (ordenInstance) {
+                ordenInstance.initOrden();
+                mostrarMensaje('¡Orden creada! Ahora puedes agregar productos.', 'success');
+                document.querySelectorAll('.btn-agregar-producto').forEach(btn => {
+                    btn.style.display = 'inline-block';
+                });
+                // Actualizar el widget flotante
+                actualizarWidgetFlotante();
+            }
+        }
+
+        function cancelarOrden() {
+            if (ordenInstance) {
+                ordenInstance.cancelOrden();
+                mostrarMensaje('Orden cancelada', 'error');
+                document.querySelectorAll('.btn-agregar-producto').forEach(btn => {
+                    btn.style.display = 'none';
+                });
+                // Actualizar el widget flotante
+                actualizarWidgetFlotante();
+            }
+        }
+
+        async function confirmarOrden() {
+            if (ordenInstance) {
+                const resultado = await ordenInstance.confirmarOrden();
+                if (resultado.success) {
+                    mostrarMensaje(`¡Orden confirmada! ID: ${resultado.idOrden}`, 'success');
+                    // Actualizar el widget flotante
+                    actualizarWidgetFlotante();
+                } else {
+                    mostrarMensaje(resultado.message, 'error');
+                }
+            }
+        }
+
+        function iniciarPago() {
+            if (ordenInstance && ordenInstance.ordenActual.productos.length > 0) {
+                const total = ordenInstance.calcularTotal();
+                const mainSections = document.querySelectorAll('.combos-section, .cajon-section');
+                mainSections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                const pagosSection = document.getElementById('pagos');
+                pagosSection.style.display = 'block';
+                if (pagoInstance) {
+                    pagoInstance.initPago(total);
+                }
+                const title = document.querySelector('.welcome h2');
+                const desc = document.querySelector('.welcome p');
+                title.textContent = '💳 Procesar Pago';
+                desc.textContent = 'Completa tu pago de forma segura';
+                document.querySelector('btn-basic[action="regresar"]').style.display = 'inline-block';
+
+                // Ocultar widget durante el pago
+                document.querySelector('.orden-widget-flotante').style.display = 'none';
+            }
+        }
+
+        function regresarDelPago() {
+            const mainSections = document.querySelectorAll('.combos-section, .cajon-section');
+            mainSections.forEach(section => {
+                section.style.display = 'block';
+            });
+            const pagosSection = document.getElementById('pagos');
+            pagosSection.style.display = 'none';
+            const title = document.querySelector('.welcome h2');
+            const desc = document.querySelector('.welcome p');
+            title.textContent = '¡Bienvenido a PupusApp!';
+            desc.textContent = 'Las mejores pupusas salvadoreñas directo a tu mesa';
+            document.querySelector('btn-basic[action="regresar"]').style.display = 'none';
+
+            // Mostrar widget de nuevo
+            document.querySelector('.orden-widget-flotante').style.display = 'block';
+            actualizarWidgetFlotante();
+        }
+
+        function actualizarWidgetFlotante() {
+            const widgetSinOrden = document.getElementById('widget-sin-orden');
+            const widgetConOrden = document.getElementById('widget-con-orden');
+            const widgetProductos = document.getElementById('widget-productos');
+            const widgetTotal = document.getElementById('widget-total');
+
+            if (ordenInstance && ordenInstance.ordenActiva) {
+                // Mostrar widget con orden
+                widgetSinOrden.style.display = 'none';
+                widgetConOrden.style.display = 'block';
+
+                // Actualizar productos en el widget
+                if (ordenInstance.ordenActual.productos.length === 0) {
+                    widgetProductos.innerHTML = '<div class="orden-empty">No hay productos</div>';
+                } else {
+                    widgetProductos.innerHTML = ordenInstance.ordenActual.productos.map(producto => `
+                        <div class="widget-producto-item">
+                            <span class="widget-producto-name">${producto.nombreProducto}</span>
+                            <span class="widget-producto-cantidad">${producto.cantidad}x</span>
+                            <span class="widget-producto-precio">${(producto.precioUnitario * producto.cantidad).toFixed(2)}</span>
+                        </div>
+                    `).join('');
+                }
+
+                // Actualizar total
+                widgetTotal.textContent = ordenInstance.calcularTotal().toFixed(2);
+            } else {
+                // Mostrar botón crear orden
+                widgetSinOrden.style.display = 'block';
+                widgetConOrden.style.display = 'none';
+            }
+        }
+
+        function mostrarProductoAgregado(idProducto) {
+            const productoItem = document.querySelector(`[data-producto*='"idProducto":${idProducto}']`);
+            if (productoItem) {
+                productoItem.classList.add('added');
+                setTimeout(() => {
+                    productoItem.classList.remove('added');
+                }, 600);
+            }
+        }
+
+        function mostrarMensaje(mensaje, tipo) {
+            const messagesContainer = document.getElementById('orden-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `orden-message ${tipo}`;
+            messageDiv.textContent = mensaje;
+            messagesContainer.appendChild(messageDiv);
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                const { orden } = await import('../data/Control/Orden.js');
+                ordenInstance = orden;
+                ordenInstance.onChange = () => {
+                    actualizarWidgetFlotante();
+                };
+                const { default: Producto } = await import('../data/Control/Producto.js');
+                productoInstance = new Producto();
+                const { default: TipoProducto } = await import('../data/Control/TipoProducto.js');
+                tipoProductoInstance = new TipoProducto();
+
+                // Montar combos
+                const { default: Combo } = await import('../data/Control/Combo.js');
+                const comboInstance = new Combo();
+                await comboInstance.showCombos();
+
+                // Montar el cajón de categorías y productos
+                tipoProductoInstance.renderTiposEnCajon((idTipoProducto, nombreTipo) => {
+                    document.getElementById('productos-titulo').textContent = `🍽️ ${nombreTipo}`;
+                    productoInstance.renderProductosEnCajon(idTipoProducto);
+                });
+
+                // Animación de producto agregado
+                const originalAddProducto = ordenInstance.addProducto.bind(ordenInstance);
+                ordenInstance.addProducto = function (producto) {
+                    const resultado = originalAddProducto(producto);
+                    if (resultado) {
+                        mostrarProductoAgregado(producto.idProducto);
+                    }
+                    return resultado;
+                };
+
+                // Pago
+                const PagoClass = await import('../data/Control/Pago.js');
+                pagoInstance = new PagoClass.default();
+
+                // Botón atrás de pago
+                document.addEventListener('click', function (event) {
+                    if (event.target.matches('btn-basic[action="regresar"]') ||
+                        event.target.closest('btn-basic[action="regresar"]')) {
+                        regresarDelPago();
+                    }
+                });
+
+                // Inicializar estado del widget flotante
+                actualizarWidgetFlotante();
+
+            } catch (error) {
+                console.error('Error al cargar los componentes:', error);
+                const detallesContainer = document.getElementById('detalles-combos');
+                if (detallesContainer) {
+                    detallesContainer.innerHTML = '<p class="error">Error al cargar los combos. Inténtalo más tarde.</p>';
+                }
+            }
+        });
+    </script>
+
+    <script type="module" src="../js/components/botonback.js"></script>
+    <script type="module" src="../js/components/CarritoOrden.js"></script>
+</body>
+
+</html>

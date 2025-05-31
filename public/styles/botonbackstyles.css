@@ -1,0 +1,120 @@
+/* Estilos para el componente BtnBasic */
+.btn-basic {
+    background: linear-gradient(135deg, var(--verde-secundario) 0%, var(--verde-claro) 100%);
+    color: var(--blanco);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px var(--sombra);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 1rem 0;
+    min-width: 120px;
+}
+
+.btn-basic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-basic:hover::before {
+    left: 100%;
+}
+
+.btn-basic:hover {
+    background: linear-gradient(135deg, var(--verde-claro) 0%, var(--verde-muy-claro) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--sombra-hover);
+}
+
+.btn-basic:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px var(--sombra);
+}
+
+.btn-basic:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.3);
+}
+
+/* Variantes del botón */
+.btn-basic.btn-outline {
+    background: transparent;
+    border: 2px solid var(--verde-secundario);
+    color: var(--verde-secundario);
+}
+
+.btn-basic.btn-outline:hover {
+    background: var(--verde-secundario);
+    color: var(--blanco);
+}
+
+.btn-basic.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    min-width: 80px;
+}
+
+.btn-basic.btn-large {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.1rem;
+    min-width: 150px;
+}
+
+/* Animación de carga (opcional) */
+.btn-basic.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-basic.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 50%;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--blanco);
+    border-radius: 50%;
+    animation: btn-spin 1s linear infinite;
+}
+
+@keyframes btn-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .btn-basic {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+        min-width: 100px;
+    }
+
+    .btn-basic.btn-large {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        min-width: 120px;
+    }
+}
