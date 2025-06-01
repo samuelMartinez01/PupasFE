@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Si Jenkins usa Git, asegúrate de que este paso apunte al mismo repositorio local
+                checkout([$class: 'GitSCM',
+                  branches: [[name: '*/master']],
+                  userRemoteConfigs: [[url: 'file:///home/henri/Escritorio/TPI-frontend/PupasFE']]])
+            }
+        }
+
+        stage('Instalar dependencias') {
+            steps {
+                dir('PupasFE') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('PupasFE') {
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('PupasFE') {
+                    sh 'npm test'
+                }
+            }
+        }
+    }
+}
