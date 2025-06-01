@@ -14,12 +14,12 @@ class Orden extends DataAccess {
     initOrden() {
         this.ordenActiva = true;
         this.estadoOrden();
-        this.notificarCambio();
+      this.notificarCambio();
     }
 
     cancelOrden() {
         this.ordenActiva = false;
-        this.ordenActual = { productos: [] };
+        this.ordenActual = { productos: []};
         this.estadoOrden();
         this.notificarCambio();
     }
@@ -29,7 +29,7 @@ class Orden extends DataAccess {
         const crearOrdenBtn = document.getElementById('crear-orden'); //BOTON1 de tp
         const cancelarOrdenBtn = document.getElementById('cancelar-orden'); //BOTON2 de tp
         const pagarOrdenBtn = document.getElementById('pagar-orden');
-        const mostrarOrden = document.getElementById('orden-container');
+        const mostrarOrden =  document.getElementById('orden-container');
 
         if (mostrarOrden) {
             mostrarOrden.style.display = this.ordenActiva ? 'block' : 'none';
@@ -77,9 +77,9 @@ class Orden extends DataAccess {
         return this.ordenActual;
     }
 
-
+    
     notificarCambio() {
-        if (this.onChange && typeof this.onChange === 'function') {
+        if(this.onChange && typeof this.onChange === 'function') {
             this.onChange();
         }
     }

@@ -120,7 +120,7 @@ class OrdenElement extends HTMLElement {
             orden.estadoOrden();
         }
     }
-
+    
 }
 
 customElements.define('carrito-orden', OrdenElement);

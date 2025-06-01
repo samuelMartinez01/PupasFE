@@ -1,11 +1,9 @@
-// /js/components/BtnBasic.js
-
 class BtnBasic extends HTMLElement {
     constructor() {
         super();
-        this.action = this.getAttribute('action') || 'default';
-        this.text = this.getAttribute('text') || 'Botón';
-        this.className = this.getAttribute('class') || 'btn-basic';
+        this.action = this.getAttribute('action') || 'default'; // Acción por defecto
+        this.text = this.getAttribute('text') || 'Botón'; // Texto por defecto
+        this.className = this.getAttribute('class') || 'btn-basic'; // Clase CSS
     }
 
     connectedCallback() {
