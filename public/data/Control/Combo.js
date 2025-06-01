@@ -119,6 +119,73 @@ class Combo extends DataAccess {
         }
     }
 
+    // Agregar este método a tu clase Combo:
+    async renderCombosEnCajon() {
+        const contenedor = document.getElementById('productos-list-cajon');
+        if (!contenedor) return;
+
+        try {
+            const combos = await this.getCombo();
+            if (!combos || !combos.length) {
+                contenedor.innerHTML = '<div class="select-category-message">No hay combos disponibles</div>';
+                return;
+            }
+
+            contenedor.innerHTML = combos.map(combo => {
+                const productosList = combo.productos.map(producto =>
+                    `<li>${producto.cantidad}x ${producto.nombre}</li>`
+                ).join('');
+
+                return `
+                <div class="producto-card combo-card-cajon" data-combo='${JSON.stringify(combo)}'>
+                    <div class="producto-nombre">${combo.nombre}</div>
+                    <div class="producto-descripcion">${combo.descripcionPublica || ''}</div>
+                    <div class="combo-contenido">
+                        <strong>Incluye:</strong>
+                        <ul>${productosList}</ul>
+                    </div>
+                    <div class="producto-precio">$${combo.precioTotal.toFixed(2)}</div>
+                    <button class="btn-agregar-combo btn-agregar-producto"${!orden.ordenActiva ? ' style="display:none;"' : ''}>
+                        Agregar Combo
+                    </button>
+                </div>
+            `;
+            }).join('');
+
+            // Agregar event listeners
+            contenedor.querySelectorAll('.btn-agregar-combo').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    if (!orden.ordenActiva) return;
+
+                    const card = e.target.closest('.combo-card-cajon');
+                    const comboData = JSON.parse(card.dataset.combo);
+
+                    // Agregar productos del combo a la orden
+                    comboData.productos.forEach(producto => {
+                        const productoParaOrden = {
+                            idProducto: producto.idProducto,
+                            nombre: producto.nombre,
+                            precioActual: producto.precioUnitario,
+                            cantidad: producto.cantidad,
+                            observaciones: `De combo "${comboData.nombre}"`
+                        };
+                        orden.addProducto(productoParaOrden);
+                    });
+
+                    // Animación visual
+                    card.classList.add('added');
+                    setTimeout(() => card.classList.remove('added'), 700);
+
+                    mostrarMensaje(`Combo "${comboData.nombre}" agregado a la orden`, 'success');
+                });
+            });
+
+        } catch (error) {
+            console.error("Error al renderizar combos en cajón:", error);
+            contenedor.innerHTML = '<div class="select-category-message">Error al cargar combos</div>';
+        }
+    }
+
 }
 
 export default Combo;

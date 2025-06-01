@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../styles/producto.css">
     <link rel="stylesheet" href="../styles/tipoproducto.css">
     <link rel="stylesheet" href="../styles/cajon.css">
+    <link rel="stylesheet" href="../styles/producto-buttons.css">
 </head>
 
 <body>
@@ -61,23 +62,12 @@
             <p>Las mejores pupusas salvadoreñas directo a tu mesa</p>
         </section>
 
-        <!-- Combos especiales destacados -->
-        <section class="combos-section">
-            <div class="section-header">
-                <h2>🎯 Combos Especiales</h2>
-                <p>Deliciosas combinaciones a precios increíbles</p>
-            </div>
-            <div id="detalles-combos" class="loading-combos">
-                Cargando combos disponibles...
-            </div>
-        </section>
-
         <!-- Cajón animado para productos -->
         <section class="cajon-section">
             <div class="cajon-trigger" onclick="toggleCajon()">
                 <div class="cajon-header">
                     <h2>🛍️ Explorar Productos</h2>
-                    <p>Descubre nuestros productos por categoría</p>
+                    <p>Descubre nuestros productos y combos por categoría</p>
                 </div>
                 <div class="cajon-toggle">
                     <span class="cajon-toggle-text">Abrir cajón</span>
@@ -141,6 +131,7 @@
         let pagoInstance = null;
         let productoInstance = null;
         let tipoProductoInstance = null;
+        let comboInstance = null;
         let cajonAbierto = false;
 
         function changePage(page) {
@@ -193,9 +184,10 @@
             if (ordenInstance) {
                 ordenInstance.initOrden();
                 mostrarMensaje('¡Orden creada! Ahora puedes agregar productos.', 'success');
-                document.querySelectorAll('.btn-agregar-producto').forEach(btn => {
-                    btn.style.display = 'inline-block';
-                });
+
+                // Mostrar botones de agregar productos y combos
+                mostrarBotonesAgregar();
+
                 // Actualizar el widget flotante
                 actualizarWidgetFlotante();
             }
@@ -205,12 +197,47 @@
             if (ordenInstance) {
                 ordenInstance.cancelOrden();
                 mostrarMensaje('Orden cancelada', 'error');
-                document.querySelectorAll('.btn-agregar-producto').forEach(btn => {
-                    btn.style.display = 'none';
-                });
+
+                // Ocultar botones de agregar productos y combos
+                ocultarBotonesAgregar();
+
                 // Actualizar el widget flotante
                 actualizarWidgetFlotante();
             }
+        }
+
+        function mostrarBotonesAgregar() {
+            // Mostrar todos los botones de agregar producto
+            document.querySelectorAll('.btn-agregar-producto').forEach(btn => {
+                btn.style.display = 'inline-block';
+            });
+
+            // Mostrar todos los botones de agregar combo
+            document.querySelectorAll('.btn-agregar-combo').forEach(btn => {
+                btn.style.display = 'inline-block';
+            });
+
+            // Mostrar botones generales de agregar
+            document.querySelectorAll('.btn-agregar').forEach(btn => {
+                btn.style.display = 'inline-block';
+            });
+        }
+
+        function ocultarBotonesAgregar() {
+            // Ocultar todos los botones de agregar producto
+            document.querySelectorAll('.btn-agregar-producto').forEach(btn => {
+                btn.style.display = 'none';
+            });
+
+            // Ocultar todos los botones de agregar combo
+            document.querySelectorAll('.btn-agregar-combo').forEach(btn => {
+                btn.style.display = 'none';
+            });
+
+            // Ocultar botones generales de agregar
+            document.querySelectorAll('.btn-agregar').forEach(btn => {
+                btn.style.display = 'none';
+            });
         }
 
         async function confirmarOrden() {
@@ -218,6 +245,10 @@
                 const resultado = await ordenInstance.confirmarOrden();
                 if (resultado.success) {
                     mostrarMensaje(`¡Orden confirmada! ID: ${resultado.idOrden}`, 'success');
+
+                    // Ocultar botones después de confirmar
+                    ocultarBotonesAgregar();
+
                     // Actualizar el widget flotante
                     actualizarWidgetFlotante();
                 } else {
@@ -229,7 +260,7 @@
         function iniciarPago() {
             if (ordenInstance && ordenInstance.ordenActual.productos.length > 0) {
                 const total = ordenInstance.calcularTotal();
-                const mainSections = document.querySelectorAll('.combos-section, .cajon-section');
+                const mainSections = document.querySelectorAll('.cajon-section');
                 mainSections.forEach(section => {
                     section.style.display = 'none';
                 });
@@ -250,7 +281,7 @@
         }
 
         function regresarDelPago() {
-            const mainSections = document.querySelectorAll('.combos-section, .cajon-section');
+            const mainSections = document.querySelectorAll('.cajon-section');
             mainSections.forEach(section => {
                 section.style.display = 'block';
             });
@@ -286,7 +317,7 @@
                         <div class="widget-producto-item">
                             <span class="widget-producto-name">${producto.nombreProducto}</span>
                             <span class="widget-producto-cantidad">${producto.cantidad}x</span>
-                            <span class="widget-producto-precio">${(producto.precioUnitario * producto.cantidad).toFixed(2)}</span>
+                            <span class="widget-producto-precio">$${(producto.precioUnitario * producto.cantidad).toFixed(2)}</span>
                         </div>
                     `).join('');
                 }
@@ -310,6 +341,16 @@
             }
         }
 
+        function mostrarComboAgregado(nombreCombo) {
+            const comboItem = document.querySelector(`[data-combo*='"nombre":"${nombreCombo}"']`);
+            if (comboItem) {
+                comboItem.classList.add('added');
+                setTimeout(() => {
+                    comboItem.classList.remove('added');
+                }, 600);
+            }
+        }
+
         function mostrarMensaje(mensaje, tipo) {
             const messagesContainer = document.getElementById('orden-messages');
             const messageDiv = document.createElement('div');
@@ -321,6 +362,56 @@
             }, 3000);
         }
 
+        // Función para agregar producto a la orden
+        function agregarProductoAOrden(producto) {
+            if (ordenInstance && ordenInstance.ordenActiva) {
+                const resultado = ordenInstance.addProducto(producto);
+                if (resultado) {
+                    mostrarMensaje(`${producto.nombre} agregado a la orden`, 'success');
+                    mostrarProductoAgregado(producto.idProducto);
+                    actualizarWidgetFlotante();
+                }
+            } else {
+                mostrarMensaje('Debes crear una orden primero', 'error');
+            }
+        }
+
+        // Función para agregar combo a la orden
+        function agregarComboAOrden(combo) {
+            if (ordenInstance && ordenInstance.ordenActiva) {
+                // Agregar cada producto del combo
+                combo.productos.forEach(producto => {
+                    ordenInstance.addProducto(producto);
+                });
+                mostrarMensaje(`Combo ${combo.nombre} agregado a la orden`, 'success');
+                mostrarComboAgregado(combo.nombre);
+                actualizarWidgetFlotante();
+            } else {
+                mostrarMensaje('Debes crear una orden primero', 'error');
+            }
+        }
+
+        // Función para manejar la selección de categorías
+        function manejarSeleccionCategoria(idTipo, nombreTipo) {
+            document.getElementById('productos-titulo').textContent = `🍽️ ${nombreTipo}`;
+
+            if (idTipo === 'combos') {
+                // Mostrar combos
+                if (comboInstance) {
+                    comboInstance.renderCombosEnCajon();
+                }
+            } else {
+                // Mostrar productos normales
+                if (productoInstance) {
+                    productoInstance.renderProductosEnCajon(idTipo);
+                }
+            }
+        }
+
+        // Hacer las funciones disponibles globalmente
+        window.agregarProductoAOrden = agregarProductoAOrden;
+        window.agregarComboAOrden = agregarComboAOrden;
+
         document.addEventListener('DOMContentLoaded', async function () {
             try {
                 const { orden } = await import('../data/Control/Orden.js');
@@ -328,23 +419,20 @@
                 ordenInstance.onChange = () => {
                     actualizarWidgetFlotante();
                 };
+
                 const { default: Producto } = await import('../data/Control/Producto.js');
                 productoInstance = new Producto();
+
                 const { default: TipoProducto } = await import('../data/Control/TipoProducto.js');
                 tipoProductoInstance = new TipoProducto();
 
-                // Montar combos
                 const { default: Combo } = await import('../data/Control/Combo.js');
-                const comboInstance = new Combo();
-                await comboInstance.showCombos();
+                comboInstance = new Combo();
 
-                // Montar el cajón de categorías y productos
-                tipoProductoInstance.renderTiposEnCajon((idTipoProducto, nombreTipo) => {
-                    document.getElementById('productos-titulo').textContent = `🍽️ ${nombreTipo}`;
-                    productoInstance.renderProductosEnCajon(idTipoProducto);
-                });
+                // Montar el cajón de categorías (incluyendo combos) y productos
+                tipoProductoInstance.renderTiposEnCajon(manejarSeleccionCategoria);
 
-                // Animación de producto agregado
+                // Interceptar el método addProducto original para agregar animaciones
                 const originalAddProducto = ordenInstance.addProducto.bind(ordenInstance);
                 ordenInstance.addProducto = function (producto) {
                     const resultado = originalAddProducto(producto);
@@ -366,21 +454,22 @@
                     }
                 });
 
-                // Inicializar estado del widget flotante
+                // Inicializar estado del widget flotante y botones
                 actualizarWidgetFlotante();
+                ocultarBotonesAgregar(); // Inicialmente ocultos
 
             } catch (error) {
                 console.error('Error al cargar los componentes:', error);
-                const detallesContainer = document.getElementById('detalles-combos');
-                if (detallesContainer) {
-                    detallesContainer.innerHTML = '<p class="error">Error al cargar los combos. Inténtalo más tarde.</p>';
+                const tiposContainer = document.getElementById('tipos-productos-cajon');
+                if (tiposContainer) {
+                    tiposContainer.innerHTML = '<p class="error">Error al cargar las categorías. Inténtalo más tarde.</p>';
                 }
             }
         });
     </script>
 
-    <script type="module" src="../js/components/botonback.js"></script>
-    <script type="module" src="../js/components/CarritoOrden.js"></script>
+    <script type="module" src="../data/Boundary/BtnBasic.js"></script>
+    <script type="module" src="../data/Boundary/OrdenElement.js"></script>
 </body>
 
 </html>
