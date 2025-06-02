@@ -35,9 +35,15 @@ class Main {
             return;
         }
 
+
+        if (!Array.isArray(tiposProductos)) {
+            return;
+        }
+
         // Agregar categorías al cajón (tipos de producto + combos)
         this.categoriasData = [
             ...tiposProductos,
+            { idTipoProducto: "0", nombre: "Combos", observaciones: "" }
             { idTipoProducto: "0", nombre: "Combos", observaciones: "" }
         ];
         this.combosData = combos;
@@ -278,6 +284,9 @@ class Main {
 document.addEventListener('DOMContentLoaded', () => {
     const app = new Main('main-container');
     app.init();
+
 });
+export default Main;
+
 
 export default Main;
