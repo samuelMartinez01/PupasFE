@@ -6,14 +6,18 @@ import { orden } from "./Orden.js";
 import '../Boundary/OrdenElement.js'
 
 class Main {
-    constructor(containerId) {
+    constructor(containerId, {
+        TipoProductoClass = TipoProducto,
+        ProductoClass = Producto,
+        PagoClass = Pago,
+        ComboClass = Combo
+    } = {}) {
         this.mainContainer = document.getElementById(containerId);
-        this.tipoProducto = new TipoProducto();
-        this.producto = new Producto();
-        this.Pago = new Pago();
-        this.combo = new Combo();
+        this.tipoProducto = new TipoProductoClass();
+        this.producto = new ProductoClass();
+        this.Pago = new PagoClass();
+        this.combo = new ComboClass();
     }
-
     async init() {
         const tiposProductos = await this.tipoProducto.getTipoProducto();
         const combos = await this.combo.getCombo();
