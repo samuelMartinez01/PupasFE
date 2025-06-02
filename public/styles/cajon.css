@@ -1,0 +1,256 @@
+/* Estilos específicos para el cajón de productos */
+
+/* Contenedor principal del cajón - ajustado para flex */
+.cajon-container {
+    flex: 2;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #28a745;
+    overflow: hidden;
+}
+
+/* Header del cajón */
+.cajon-header {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+.cajon-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Cuerpo del cajón */
+.cajon-body {
+    padding: 1.5rem;
+}
+
+/* Sección de selección */
+.seccion-seleccion {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.campo-seleccion {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-seleccion label {
+    font-weight: bold;
+    color: #2d5016;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* Estilos para los selects */
+.select-cajon {
+    padding: 0.8rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.select-cajon:focus {
+    outline: none;
+    border-color: #28a745;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+.select-cajon:disabled {
+    background: #f8f9fa;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.select-cajon:hover:not(:disabled) {
+    border-color: #20c997;
+}
+
+/* Sección de detalles */
+.seccion-detalles {
+    margin-bottom: 1.5rem;
+}
+
+.producto-detalle {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.producto-detalle.con-producto {
+    background: white;
+    border-color: #28a745;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.1);
+}
+
+.detalle-placeholder {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.detalle-producto {
+    width: 100%;
+    text-align: center;
+}
+
+.detalle-producto h4 {
+    color: #2d5016;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.detalle-producto p {
+    color: #6c757d;
+    margin-bottom: 0.3rem;
+    line-height: 1.4;
+}
+
+.detalle-precio {
+    color: #28a745;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+}
+
+/* Sección de acciones */
+.seccion-acciones {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* Botones de acción */
+.btn-accion {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 160px;
+}
+
+.btn-agregar {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.btn-agregar:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.btn-agregar:disabled {
+    background: linear-gradient(135deg, #6c757d 0%, #adb5bd 100%);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 2px 5px rgba(108, 117, 125, 0.2);
+}
+
+.btn-limpiar {
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.btn-limpiar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+}
+
+.btn-limpiar:active {
+    transform: translateY(0);
+}
+
+/* Responsive para el cajón */
+@media (max-width: 968px) {
+    .seccion-seleccion {
+        grid-template-columns: 1fr;
+    }
+
+    .seccion-acciones {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-accion {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .cajon-body {
+        padding: 1rem;
+    }
+
+    .cajon-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .producto-detalle {
+        min-height: 100px;
+        padding: 1rem;
+    }
+
+    .btn-accion {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        min-width: auto;
+    }
+}
+
+/* Animaciones específicas del cajón */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.detalle-producto {
+    animation: slideIn 0.3s ease;
+}
+
+/* Estados de carga */
+.select-cajon.loading {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTAiIGN5PSIxMCIgcj0iOCIgc3Ryb2tlPSIjY2NjIiBzdHJva2Utd2lkdGg9IjIiLz4KPGF0aCBkPSJNMTAgMnMwIDItMiAyLTItMiAyLTIiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

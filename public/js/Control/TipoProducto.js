@@ -4,7 +4,7 @@ class TipoProducto extends DataAccess {
     constructor() {
         super();
     }
-
+    
     async getTipoProducto() {
         try {
             const response = await fetch(this.BASE_URL + "tipoproducto", { method: "GET" });

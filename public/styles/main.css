@@ -1,5 +1,4 @@
-/* ============ ESTILOS PRINCIPALES MAIN.CSS - PUPUSERÍA ============ */
-/* Reset y configuración base */
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
@@ -7,515 +6,351 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #2d5016 0%, #4a7c3a 50%, #6fa85e 100%);
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     min-height: 100vh;
-    color: #1a3d0a;
-    line-height: 1.4;
-    overflow-x: hidden;
-}
-
-#main-container {
-    max-width: 1200px;
-    margin: 10px auto;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.98);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(10px);
-    min-height: calc(100vh - 20px);
-}
-
-/* ============ HEADER DE LA PUPUSERÍA ============ */
-.pupuseria-header {
-    text-align: center;
-    padding: 15px 0 20px 0;
-    border-bottom: 3px solid #4a7c3a;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #f0f8f0 0%, #fff 100%);
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(74, 124, 58, 0.15);
-}
-
-.pupuseria-header h1 {
-    font-size: 2em;
-    color: #2d5016;
-    margin-bottom: 8px;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.pupuseria-header p {
-    font-size: 1em;
-    color: #4a7c3a;
-    font-style: italic;
-}
-
-/* ============ LAYOUT PRINCIPAL ============ */
-.layout-container {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 20px;
-    min-height: 500px;
-}
-
-/* ============ SECCIÓN DE MENÚ ============ */
-.menu-container {
-    background: #fff;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    border: 2px solid #e8f5e8;
-    max-height: calc(100vh - 180px);
-    overflow-y: auto;
-}
-
-/* Scrollbar personalizado para el menú */
-.menu-container::-webkit-scrollbar {
-    width: 8px;
-}
-
-.menu-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-.menu-container::-webkit-scrollbar-thumb {
-    background: #6fa85e;
-    border-radius: 10px;
-}
-
-.menu-container::-webkit-scrollbar-thumb:hover {
-    background: #4a7c3a;
-}
-
-.section-title {
-    background: linear-gradient(135deg, #4a7c3a, #6fa85e);
-    color: white;
-    padding: 12px 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(74, 124, 58, 0.3);
-}
-
-.section-title h2 {
-    font-size: 1.2em;
-    font-weight: 600;
-    margin: 0;
-}
-
-/* ============ SECCIÓN DE ÓRDENES ============ */
-.orden-container {
-    background: linear-gradient(135deg, #f0f8f0 0%, #ffffff 100%);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    border: 2px solid #c8e6c9;
-    position: sticky;
-    top: 10px;
-    height: fit-content;
-    max-height: calc(100vh - 40px);
-    overflow-y: auto;
-}
-
-.orden-container::-webkit-scrollbar {
-    width: 6px;
-}
-
-.orden-container::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
-}
-
-.orden-container::-webkit-scrollbar-thumb {
-    background: #6fa85e;
-    border-radius: 10px;
-}
-
-.botones-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 15px;
 }
 
-.detalles-orden {
-    background: white;
-    border-radius: 12px;
-    padding: 15px;
-    min-height: 150px;
-    border: 2px dashed #c8e6c9;
+/* Barra superior */
+.header {
+    background: linear-gradient(135deg, #2d5016 0%, #4a7c59 100%);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.orden-vacia {
-    text-align: center;
-    color: #999;
-    padding: 30px 15px;
-}
-
-.orden-icon {
-    font-size: 2.5em;
-    margin-bottom: 12px;
-    opacity: 0.5;
-}
-
-/* ============ TARJETAS DE TIPO DE PRODUCTO ============ */
-.productos-container {
-    margin-bottom: 15px;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    background: white;
-    border: 1px solid #e8f5e8;
-}
-
-.tipoproducto-card {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    background: linear-gradient(135deg, #f0f8f0 0%, #ffffff 100%);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: inherit;
-    border-bottom: 1px solid #e8f5e8;
-}
-
-.tipoproducto-card:hover {
-    background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 15px rgba(74, 124, 58, 0.15);
-}
-
-.tipo-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.tipo-icon {
-    font-size: 1.8em;
-    min-width: 45px;
-}
-
-.tipo-info {
-    flex: 1;
-    text-align: left;
-}
-
-.tipo-info h3 {
-    font-size: 1.1em;
-    color: #2d5016;
-    margin-bottom: 4px;
-    font-weight: 600;
-}
-
-.tipo-info small {
-    color: #4a7c3a;
-    font-size: 0.85em;
-}
-
-.tipo-arrow {
-    font-size: 1.1em;
-    color: #4a7c3a;
-    transition: transform 0.3s ease;
-}
-
-/* ============ DETALLES DE PRODUCTOS ============ */
-.productos-detalle {
-    padding: 15px;
-    background: #fafcfa;
-    border-top: 3px solid #4a7c3a;
-    animation: slideDown 0.3s ease-out;
-}
-
-.producto-item {
-    background: white;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 12px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e8f5e8;
-    transition: all 0.3s ease;
-}
-
-.producto-item:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-}
-
-.producto-header {
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
 }
 
-.producto-header h4 {
-    color: #2d5016;
-    font-size: 1em;
-    font-weight: 600;
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header-info {
+    text-align: right;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Contenedor principal */
+.main-content {
     flex: 1;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
 }
 
-.producto-price {
-    background: linear-gradient(135deg, #4a7c3a, #6fa85e);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 0.95em;
-    box-shadow: 0 2px 6px rgba(74, 124, 58, 0.3);
+/* NUEVO: Contenedor flex para cajón y orden */
+.content-wrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
 }
 
-.producto-description {
-    color: #666;
-    font-size: 0.9em;
-    margin-bottom: 12px;
-    line-height: 1.3;
+/* NUEVO: Sidebar de orden (derecha) */
+.orden-sidebar {
+    flex: 1;
+    min-width: 300px;
 }
 
-/* ============ BOTONES ============ */
+/* Contenedor de main-container dentro del sidebar */
+#main-container {
+    width: 100%;
+}
+
+/* Botones de orden */
 .btn-crear,
 .btn-cancelar,
-.pagar-btn,
-.btn-volver {
-    padding: 12px 20px;
+.pagar-btn {
+    width: 100%;
+    padding: 12px 24px;
+    margin-bottom: 0.5rem;
     border: none;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 600;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
 }
 
 .btn-crear {
-    background: linear-gradient(135deg, #4a7c3a, #6fa85e);
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     color: white;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
 }
 
 .btn-crear:hover {
-    background: linear-gradient(135deg, #3d6530, #4a7c3a);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(74, 124, 58, 0.3);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
 }
 
 .btn-cancelar {
-    background: linear-gradient(135deg, #dc3545, #e74c3c);
+    background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
     color: white;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
 }
 
 .btn-cancelar:hover {
-    background: linear-gradient(135deg, #c82333, #dc3545);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
 }
 
 .pagar-btn {
-    background: linear-gradient(135deg, #2d5016, #4a7c3a);
+    background: linear-gradient(135deg, #007bff 0%, #6610f2 100%);
     color: white;
-    font-size: 16px;
-    padding: 15px 25px;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 }
 
 .pagar-btn:hover {
-    background: linear-gradient(135deg, #1a3d0a, #2d5016);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(45, 80, 22, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
 }
 
-.btn-volver {
-    background: linear-gradient(135deg, #6c757d, #868e96);
-    color: white;
-    margin-bottom: 15px;
+/* Contenedor de productos */
+.productos-container {
+    margin-bottom: 1.5rem;
 }
 
-.btn-volver:hover {
-    background: linear-gradient(135deg, #5a6268, #6c757d);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.3);
-}
-
-.btn-agregar {
-    background: linear-gradient(135deg, #4a7c3a, #6fa85e);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 20px;
-    font-weight: 600;
+/* Tarjetas de tipo de producto */
+.tipoproducto-card {
+    width: 100%;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #28a745;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    width: 100%;
-    font-size: 0.9em;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.btn-agregar:hover {
-    background: linear-gradient(135deg, #3d6530, #4a7c3a);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 15px rgba(74, 124, 58, 0.4);
+.tipoproducto-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.2);
+    border-color: #20c997;
 }
 
-/* ============ COMBOS ESPECIALES ============ */
-.combo-card {
-    border: 2px solid #ffd700;
-    background: linear-gradient(135deg, #fff8dc 0%, #ffffff 100%);
+.tipoproducto-card h2 {
+    color: #2d5016;
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.combo-card .producto-header h4 {
-    color: #b8860b;
-}
-
-.combo-card .producto-price {
-    background: linear-gradient(135deg, #ffd700, #ffed4e);
-    color: #b8860b;
-}
-
-/* ============ ELEMENTOS DE ORDEN ============ */
-.orden-item {
+/* Detalles de productos */
+.productos-detalle {
     background: white;
-    border-radius: 10px;
-    padding: 12px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border: 1px solid #e8f5e8;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #28a745;
 }
 
-.orden-item-header {
+/* Estilos para productos individuales */
+.producto-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: all 0.2s ease;
 }
 
-.orden-item-nombre {
-    font-weight: 600;
+.producto-item:hover {
+    background: #e9ecef;
+    border-color: #28a745;
+}
+
+.producto-info h3 {
     color: #2d5016;
-    font-size: 0.95em;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
 }
 
-.orden-item-precio {
-    color: #4a7c3a;
-    font-weight: 600;
+.producto-precio {
+    font-weight: bold;
+    color: #28a745;
+    font-size: 1.2rem;
 }
 
-.orden-item-controls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-}
-
-.cantidad-btn {
-    background: #4a7c3a;
+/* Botones de agregar */
+.btn-agregar {
+    background: #28a745;
     color: white;
     border: none;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
+    padding: 8px 16px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-weight: bold;
+    transition: all 0.2s ease;
 }
 
-.cantidad-btn:hover {
-    background: #2d5016;
+.btn-agregar:hover {
+    background: #218838;
+    transform: scale(1.05);
 }
 
-.cantidad-display {
-    padding: 4px 8px;
-    background: #f0f8f0;
-    border-radius: 5px;
-    font-weight: 600;
-    min-width: 30px;
+/* Estilos para orden */
+.orden-container {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #28a745;
+}
+
+.orden-title {
+    color: #2d5016;
     text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.orden-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .orden-total {
-    background: linear-gradient(135deg, #2d5016, #4a7c3a);
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #28a745;
+    text-align: right;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid #28a745;
+}
+
+/* Pie de página */
+.footer {
+    background: linear-gradient(135deg, #2d5016 0%, #4a7c59 100%);
     color: white;
-    padding: 15px;
-    border-radius: 12px;
-    margin-top: 15px;
+    padding: 2rem 1rem;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #ffd700;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.footer-section p,
+.footer-section a {
+    color: #e9ecef;
+    text-decoration: none;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.footer-section a:hover {
+    color: #ffd700;
+    transition: color 0.3s ease;
+}
+
+.footer-bottom {
     text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #4a7c59;
+    color: #adb5bd;
+    font-size: 0.9rem;
 }
 
-.orden-total h3 {
-    font-size: 1.1em;
-    margin-bottom: 5px;
+/* Responsive */
+@media (max-width: 968px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .orden-sidebar {
+        min-width: auto;
+    }
+
+    .btn-crear,
+    .btn-cancelar,
+    .pagar-btn {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
 }
 
-.orden-total .total-amount {
-    font-size: 1.3em;
-    font-weight: 700;
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-info {
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    .main-content {
+        margin: 1rem auto;
+        padding: 0 0.5rem;
+    }
+
+    .content-wrapper {
+        gap: 1rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
 }
 
-/* ============ SECCIÓN DE PAGOS ============ */
-#pagos {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-.pago-header {
-    text-align: center;
-    padding: 20px 0;
-    border-bottom: 2px solid #4a7c3a;
-    margin-bottom: 20px;
-}
-
-.pago-header h2 {
-    color: #2d5016;
-    font-size: 1.8em;
-    margin-bottom: 10px;
-}
-
-.metodo-pago {
-    background: #f0f8f0;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 15px;
-    border: 2px solid transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.metodo-pago:hover,
-.metodo-pago.selected {
-    border-color: #4a7c3a;
-    box-shadow: 0 4px 12px rgba(74, 124, 58, 0.2);
-}
-
-.metodo-pago h3 {
-    color: #2d5016;
-    margin-bottom: 5px;
-}
-
-.metodo-pago p {
-    color: #666;
-    font-size: 0.9em;
-}
-
-/* ============ ANIMACIONES ============ */
-@keyframes slideDown {
+/* Animaciones */
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(20px);
     }
 
     to {
@@ -524,99 +359,53 @@ body {
     }
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+.productos-detalle {
+    animation: fadeIn 0.3s ease;
 }
 
-/* ============ RESPONSIVE DESIGN ============ */
-@media (max-width: 1024px) {
-    .layout-container {
-        grid-template-columns: 1fr 300px;
-        gap: 15px;
-    }
-
-    .pupuseria-header h1 {
-        font-size: 1.8em;
-    }
+.orden-container {
+    animation: fadeIn 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    #main-container {
-        margin: 5px;
-        padding: 12px;
-        border-radius: 12px;
-        min-height: calc(100vh - 10px);
-    }
-
-    .layout-container {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .orden-container {
-        position: static;
-        order: -1;
-        max-height: none;
-    }
-
-    .menu-container {
-        max-height: none;
-    }
-
-    .pupuseria-header h1 {
-        font-size: 1.6em;
-    }
-
-    .pupuseria-header p {
-        font-size: 0.9em;
-    }
-
-    .btn-crear,
-    .btn-cancelar,
-    .pagar-btn {
-        padding: 10px 15px;
-        font-size: 13px;
-    }
-
-    .tipo-header {
-        gap: 10px;
-    }
-
-    .tipo-icon {
-        font-size: 1.6em;
-        min-width: 40px;
-    }
+/* Estilos para elementos de pago */
+#pagos {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 2px solid #28a745;
 }
 
-@media (max-width: 480px) {
-    .pupuseria-header {
-        padding: 12px 0 15px 0;
-    }
+/* Efectos hover adicionales */
+.btn-crear:active,
+.btn-cancelar:active,
+.pagar-btn:active {
+    transform: translateY(0);
+}
 
-    .pupuseria-header h1 {
-        font-size: 1.4em;
-    }
+/* Mejoras visuales para combos */
+#detalles-combos {
+    background: linear-gradient(135deg, #fff5ee 0%, #ffffff 100%);
+    border-left-color: #ffd700;
+}
 
-    .section-title h2 {
-        font-size: 1.1em;
-    }
+/* Estilos para mensajes de estado */
+.mensaje-exito {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
 
-    .producto-item {
-        padding: 12px;
-    }
-
-    .producto-header h4 {
-        font-size: 0.95em;
-    }
-
-    .producto-price {
-        padding: 5px 8px;
-        font-size: 0.9em;
-    }
+.mensaje-error {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
 }
