@@ -29,8 +29,10 @@
     "jsdom": "^26.1.0",
     "mocha": "^11.5.0",
     "node-fetch": "^3.3.2",
+    "nyc": "^17.1.0",
     "nodemon": "^3.1.10",
-    "sinon": "^20.0.0"
+    "sinon": "^20.0.0",
+    "sonar-scanner": "^3.1.0"
   },
   "dependencies": {
     "express": "^5.1.0"
