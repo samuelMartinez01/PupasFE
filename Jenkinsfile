@@ -13,7 +13,6 @@ pipeline {
 
         stage('Limpiar contenedores previos') {
             steps {
-                // Si ya existe, lo apaga y elimina
                 sh 'docker compose down || true'
             }
         }
@@ -22,7 +21,7 @@ pipeline {
             steps {
                 script {
                     sh 'docker compose up --build -d'
-                    // Espera si es necesario: sh 'sleep 10'
+                    // Cambia el nombre del servicio si es necesario
                     sh 'docker compose exec -T pupasfe npm test'
                 }
             }
@@ -31,9 +30,9 @@ pipeline {
 
     post {
         always {
-            // apaga contenedores aunque falle
             sh 'docker compose down || true'
-            echo 'El pipeline terminó (éxito o error)'
+            // Publica los resultados de los tests en Jenkins
+            junit 'reports/junit/test-results.xml'
         }
         failure {
             echo 'La compilación o los tests han fallado'
