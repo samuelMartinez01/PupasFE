@@ -1,5 +1,6 @@
 import { html, render } from '../librerias/lit/lit-html.js';
 import { orden } from '../Control/Orden.js';
+import Pago from "../Control/Pago.js";
 
 class OrdenElement extends HTMLElement {
     constructor() {
@@ -7,6 +8,7 @@ class OrdenElement extends HTMLElement {
         this.root = this.attachShadow({ mode: 'open' });
         orden.onChange = () => this.render();
         this.render();
+        this.pago = new Pago();
     }
 
     render() {
@@ -106,40 +108,44 @@ class OrdenElement extends HTMLElement {
             }
 
             .acciones-orden {
-    margin-top: 16px;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
+                margin-top: 16px;
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+            }
 
-.btn-cancelar,
-.btn-pagar {
-    flex: 1;
-    padding: 8px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 14px;
-    cursor: pointer;
-}
+            .btn-cancelar,
+            .btn-pagar {
+                flex: 1;
+                padding: 8px;
+                border: none;
+                border-radius: 6px;
+                font-weight: bold;
+                font-size: 14px;
+                cursor: pointer;
+            }
 
-.btn-cancelar {
-    background-color: #dc3545;
-    color: white;
-}
-.btn-cancelar:hover {
-    background-color: #b02a37;
-}
+            .btn-cancelar {
+                background-color: #dc3545;
+                color: white;
+            }
+            .btn-cancelar:hover {
+                background-color: #b02a37;
+            }
 
-.btn-pagar {
-    background-color: #28a745;
-    color: white;
-}
-.btn-pagar:hover {
-    background-color: #1f7a36;
-}
-
-
+            .btn-pagar {
+                background-color: #28a745;
+                color: white;
+            }
+            .btn-pagar:hover {
+                background-color: #1f7a36;
+            }
+            .btn-pagar:disabled {
+                background-color: #c5dbcf;
+                color: #777;
+                cursor: not-allowed;
+                opacity: 0.7;
+            }
             </style>
 
             <div class="orden-container">
@@ -164,63 +170,59 @@ class OrdenElement extends HTMLElement {
                 </div>
                 <div class="acciones-orden">
                 <button id="cancelar-orden" class="btn-cancelar">❌ Cancelar Orden</button>
-                <button id="pagar-orden" class="btn-pagar">💰 Ir a pagar</button>
+                <button id="pagar-orden" class="btn-pagar" ?disabled=${orden.ordenActual.productos.length === 0}>
+                    💰 Ir a pagar
+                </button>
+
                  </div>
 
             </div>
         `;
     }
 
-   addEventListeners() {
-    const productosOrden = this.root.querySelector('#productos-orden');
-    if (productosOrden && !this._listenerAttached) {
-        this._listenerAttached = true;
-
-        productosOrden.addEventListener('click', (e) => {
-            const target = e.target;
-            if (!target.dataset.id) return;
-            const id = parseInt(target.dataset.id);
-            if (target.classList.contains('btn-mas')) {
-                this.incrementarProducto(id);
-            } else if (target.classList.contains('btn-menos')) {
-                this.decrementarProducto(id);
-            }
-        });
-    }
-
-    // BOTÓN CANCELAR ORDEN (mismo efecto que en Main.js)
-const btnCancelar = this.root.querySelector('#cancelar-orden');
-if (btnCancelar && !btnCancelar._listenerAttached) {
-    btnCancelar._listenerAttached = true;
-    btnCancelar.addEventListener('click', () => {
-        if (confirm("¿Seguro de que quieres cancelar la orden?")) {
-            orden.cancelOrden();
-            orden.estadoOrden();
-        }
-    });
-}
-
-
-    // BOTÓN IR A PAGAR (mismo efecto que en Main.js)
-    const btnPagar = this.root.querySelector('#pagar-orden');
-    if (btnPagar && !btnPagar._listenerAttached) {
-        btnPagar._listenerAttached = true;
-        btnPagar.addEventListener('click', () => {
-            const mainContainer = document.getElementById('main-container');
-            const pagos = document.getElementById('pagos');
-
-            if (mainContainer && pagos) {
-                mainContainer.style.display = 'none';
-                pagos.style.display = 'block';
-            }
-
-            import('../Control/Pago.js').then(({ default: Pago }) => {
-                const pago = new Pago();
-                pago.initPago(orden.calcularTotal());
+    addEventListeners() {
+        const productosOrden = this.root.querySelector('#productos-orden');
+        if (productosOrden && !this._listenerAttached) {
+            this._listenerAttached = true;
+            productosOrden.addEventListener('click', (e) => {
+                const target = e.target;
+                if (!target.dataset.id) return;
+                const id = parseInt(target.dataset.id);
+                if (target.classList.contains('btn-mas')) {
+                    this.incrementarProducto(id);
+                } else if (target.classList.contains('btn-menos')) {
+                    this.decrementarProducto(id);
+                }
             });
-        });
+        }
+
+        // BOTÓN CANCELAR ORDEN 
+        const btnCancelar = this.root.querySelector('#cancelar-orden');
+        if (btnCancelar && !btnCancelar._listenerAttached) {
+            btnCancelar._listenerAttached = true;
+            btnCancelar.addEventListener('click', () => {
+                if (confirm("¿Seguro de que quieres cancelar la orden?")) {
+                    orden.cancelOrden();
+                    orden.estadoOrden();
+                }
+            });
+        }
+
+        // BOTÓN IR A PAGAR 
+        const btnPagar = this.root.querySelector('#pagar-orden');
+        if (btnPagar && !btnPagar._listenerAttached) {
+            btnPagar._listenerAttached = true;
+            btnPagar.addEventListener('click', () => {
+                const mainContainer = document.getElementById('main-container');
+                const pagos = document.getElementById('pagos');
+                if (mainContainer && pagos) {
+                    mainContainer.style.display = 'none';
+                    pagos.style.display = 'block';
+                }
+                this.pago.initPago(orden.calcularTotal());
+            });
+        }
     }
-}
 
 
     incrementarProducto(idProducto) {

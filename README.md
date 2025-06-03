@@ -1,6 +1,6 @@
 para ejecutar con el yml 
 
-docker compose up --build //levanta
+docker compose up --build //levanta//
 
 docker compose down //baja
 
