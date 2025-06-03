@@ -31,7 +31,7 @@ pipeline {
 
     post {
         always {
-            // Siempre intenta apagar los contenedores aunque el pipeline falle
+            // apaga contenedores aunque falle
             sh 'docker compose down || true'
             echo 'El pipeline terminó (éxito o error)'
         }
