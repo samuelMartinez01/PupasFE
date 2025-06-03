@@ -4,35 +4,42 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Si Jenkins usa Git, asegúrate de que este paso apunte al mismo repositorio local
                 checkout([$class: 'GitSCM',
-                  branches: [[name: '*/master']],
-                  userRemoteConfigs: [[url: 'file:///home/henri/Escritorio/TPI-frontend/PupasFE']]])
+                    branches: [[name: '*/master']],
+                    userRemoteConfigs: [[url: 'https://github.com/samuelMartinez01/PupasFE.git']]
+                ])
             }
         }
 
         stage('Instalar dependencias') {
             steps {
-                dir('PupasFE') {
-                    sh 'npm install'
-                }
+                sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                dir('PupasFE') {
-                    sh 'npm run build'
-                }
+                sh 'npm run build'
             }
         }
 
         stage('Test') {
             steps {
-                dir('PupasFE') {
-                    sh 'npm test'
-                }
+                sh 'npm test'
             }
         }
     }
+
+    post {
+        always {
+            echo 'El pipeline terminó (éxito o error)'
+        }
+        failure {
+            echo 'La compilación o los tests han fallado'
+        }
+        success {
+            echo '¡Pipeline exitoso! 🥵'
+        }
+    }
 }
+
