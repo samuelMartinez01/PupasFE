@@ -6,7 +6,7 @@ class Pago extends DataAccess {
         super();
         this.idOrden = 0;
     }
-    
+
     async initPago(totalFront) {
         const metodosDePago = [
             'Efectivo',
@@ -23,15 +23,15 @@ class Pago extends DataAccess {
                 <p><strong>Monto a pagar:</strong> $${totalFront.toFixed(2)}</p>
                 <div class="metodo-pago-container">
                     <label for="metodo-pago">Método de pago:</label>
-                     ${metodosDePago.map(metodo => 
-                        `<label class="radio-metodo">
+                     ${metodosDePago.map(metodo =>
+                `<label class="radio-metodo">
                         <input type="radio" name="metodo-pago" value="${metodo}">
                          ${metodo}</label> `).join('')}
                 </div>
                 <button id="btn-confirmar-pago" class="btn-confirmar">Confirmar Pago</button>
                 <btn-basic action="regresar" text="Atras" class="btn-regresar"></btn-basic>
             `;
-            const btnConfirmarPago = document.getElementById("btn-confirmar-pago"); 
+            const btnConfirmarPago = document.getElementById("btn-confirmar-pago");
 
             btnConfirmarPago.addEventListener("click", () => { //Evento para hacer el pago
                 const metodoSeleccionado = document.querySelector('input[name="metodo-pago"]:checked');
@@ -56,9 +56,18 @@ class Pago extends DataAccess {
 
 
     async confirmarPago(datosPago) {
+        if (!navigator.onLine) {
+            alert("Al parecer no tienes conexion a internet. Pero guardaremos tu Orden!");
+
+            orden.cancelOrden();
+            document.getElementById('pagos').style.display = 'none';
+            document.getElementById('main-container').style.display = 'block';
+            return;
+        }
+
         try {
             const result = await orden.confirmarOrden();
-            if(result.success && result.idOrden) {
+            if (result.success && result.idOrden) {
                 this.idOrden = result.idOrden;
                 const pago = {
                     idOrden: this.idOrden,
@@ -71,11 +80,11 @@ class Pago extends DataAccess {
                     },
                     body: JSON.stringify(pago)
                 });
-    
+
                 if (response.ok) {
                     const pagoCreado = await response.json();
                     const idPagoCreado = pagoCreado.idPago;
-                    console.log("pago con id" + idPagoCreado);                
+                    console.log("pago con id" + idPagoCreado);
                     await this.createPagoDetalle(idPagoCreado);
                     console.log("Pago y detalle creados con éxito. ID:", idPagoCreado);
                     alert(`Pago Exitoso, su orden ha sido confirmada`);
@@ -83,7 +92,7 @@ class Pago extends DataAccess {
                     document.getElementById('pagos').style.display = 'none';
                     document.getElementById('main-container').style.display = 'block';
 
-                    
+
                 } else {
                     let errorMessage = "Error al confirmar el pago";
                     try {
@@ -103,7 +112,7 @@ class Pago extends DataAccess {
             alert("Error de conexión con el servidor: " + error.message);
         }
     }
-    
+
     async createPagoDetalle(idPagoCreado) {
         console.log("Desde detalle" + idPagoCreado);
         try {
@@ -116,16 +125,16 @@ class Pago extends DataAccess {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    idPago: idPagoCreado,  
+                    idPago: idPagoCreado,
                     monto: total
                 })
             });
-    
+
             if (!response.ok) {
                 const errorText = await response.text();
                 throw new Error(errorText || "Error al crear el detalle");
             }
-    
+
         } catch (error) {
             console.error("Error en createPagoDetalle:", error);
             throw error;

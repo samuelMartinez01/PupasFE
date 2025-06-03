@@ -340,4 +340,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const app = new Main('main-container');
     app.init();
 });
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log("Service Worker registrado:", reg.scope))
+            .catch(err => console.error("SW error:", err));
+    });
+}
+
 export default Main;
