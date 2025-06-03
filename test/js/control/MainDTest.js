@@ -46,8 +46,6 @@ describe("Main", () => {
         await app.init();
 
         assert.exists(document.getElementById("crear-orden"));
-        assert.exists(document.getElementById("cancelar-orden"));
-        assert.exists(document.getElementById("pagar-orden"));
         consoleStub.restore();
 
         const cards = document.querySelectorAll(".tipoproducto-card");
@@ -73,18 +71,6 @@ describe("Main", () => {
         document.getElementById("crear-orden").click();
         assert(orden.initOrden.calledOnce);
 
-        // Simular clic en Cancelar (forzamos confirmación)
-        global.confirm = () => true;
-        document.getElementById("cancelar-orden").click();
-        assert(orden.cancelOrden.calledOnce);
-
-        // Simular clic en Pagar
-        const pagosContainer = document.createElement("div");
-        pagosContainer.id = "pagos";
-        document.body.appendChild(pagosContainer);
-
-        document.getElementById("pagar-orden").click();
-        assert(app.Pago.initPago.calledWith(50));
     });
 
     // 4. showMenu.ok para productos llama getProductos y showProductos

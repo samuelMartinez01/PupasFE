@@ -71,24 +71,16 @@ describe("Main Integracion", () => {
 
     it("createBotonesOrden.ok", () => {
         const fakeInit = sinon.stub(ordenModule.orden, "initOrden");
-        const fakeCancel = sinon.stub(ordenModule.orden, "cancelOrden");
         global.confirm = () => true;
 
         main.createBotonesOrden();
 
         const btnCrear = document.getElementById("crear-orden");
-        const btnCancelar = document.getElementById("cancelar-orden");
-        const btnPagar = document.getElementById("pagar-orden");
 
         assert.exists(btnCrear);
-        assert.exists(btnCancelar);
-        assert.exists(btnPagar);
 
         btnCrear.click();
         assert(fakeInit.calledOnce);
-
-        btnCancelar.click();
-        assert(fakeCancel.calledOnce);
     });
 
     it("showMenu.productos.ok", async () => {

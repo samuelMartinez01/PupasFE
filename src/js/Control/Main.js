@@ -69,30 +69,6 @@ class Main {
         this.crearBtn.textContent = 'Crear Orden';
         this.mainContainer.appendChild(this.crearBtn);
         this.crearBtn.addEventListener('click', () => orden.initOrden());
-
-        this.cancelarBtn = document.createElement('button');
-        this.cancelarBtn.id = 'cancelar-orden';
-        this.cancelarBtn.className = 'btn-cancelar';
-        this.cancelarBtn.textContent = 'Cancelar Orden';
-        this.cancelarBtn.style.display = 'none';
-        this.mainContainer.appendChild(this.cancelarBtn);
-        this.cancelarBtn.addEventListener('click', () => {
-            if (confirm("¿Seguro de que quieres cancelar la orden?")) {
-                orden.cancelOrden();
-            }
-        });
-
-        this.pagarBtn = document.createElement('button');
-        this.pagarBtn.id = 'pagar-orden';
-        this.pagarBtn.className = 'pagar-btn';
-        this.pagarBtn.textContent = 'Ir a pagar';
-        this.pagarBtn.style.display = 'none';
-        this.mainContainer.appendChild(this.pagarBtn);
-        this.pagarBtn.addEventListener('click', () => {
-            document.getElementById('main-container').style.display = 'none';
-            document.getElementById('pagos').style.display = 'block';
-            this.Pago.initPago(orden.calcularTotal());
-        });
     }
 
     initCajon() {
