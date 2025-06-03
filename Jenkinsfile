@@ -11,27 +11,28 @@ pipeline {
             }
         }
 
-        stage('Instalar dependencias') {
+        stage('Build y Test (Docker Compose)') {
             steps {
-                sh 'npm install'
-            }
-        }
+                script {
+                    // Build los servicios y ejecuta los tests, luego apaga y elimina contenedores
+                    sh 'docker compose up --build -d' // Levanta en segundo plano
+                    // Espera un poco si tu contenedor necesita tiempo para "arrancar"
+                    // sh 'sleep 10'
 
-        stage('Build') {
-            steps {
-                sh 'npm run build'
-            }
-        }
+                    // Ejecutar tests dentro del contenedor principal (ajusta el nombre si es necesario)
+                    sh 'docker compose exec -T <nombre_servicio> npm test'
 
-        stage('Test') {
-            steps {
-                sh 'npm test'
+                    // Apaga y elimina los contenedores, limpia imágenes y volúmenes temporales
+                    sh 'docker compose down'
+                }
             }
         }
     }
 
     post {
         always {
+            // Siempre intenta apagar los contenedores aunque el pipeline falle
+            sh 'docker compose down || true'
             echo 'El pipeline terminó (éxito o error)'
         }
         failure {
@@ -42,4 +43,3 @@ pipeline {
         }
     }
 }
-
