@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "mocha \"test/**/*.js\" --reporter mocha-junit-reporter --reporter-options mochaFile=./reports/junit/test-results.xml",
+    "test": "mocha \"test/**/*.js\" --reporter spec && mocha \"test/**/*.js\" --reporter mocha-junit-reporter --reporter-options mochaFile=./reports/junit/test-results.xml",
+    "coverage": "nyc npm test",
     "dev": "nodemon server.js"
   },
   "repository": {

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="0.155" tests="67" failures="0">
-  <testsuite name="Root Suite" timestamp="2025-06-03T06:17:28" tests="0" time="0.000" failures="0">
+<testsuites name="Mocha Tests" time="0.153" tests="67" failures="0">
+  <testsuite name="Root Suite" timestamp="2025-06-03T06:22:44" tests="0" time="0.000" failures="0">
   </testsuite>
-  <testsuite name="Combo Integracion" timestamp="2025-06-03T06:17:28" tests="7" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/ComboIT.js" time="0.037" failures="0">
-    <testcase name="Combo Integracion getCombo.ok" time="0.001" classname="getCombo.ok">
+  <testsuite name="Combo Integracion" timestamp="2025-06-03T06:22:44" tests="7" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/ComboIT.js" time="0.036" failures="0">
+    <testcase name="Combo Integracion getCombo.ok" time="0.002" classname="getCombo.ok">
     </testcase>
-    <testcase name="Combo Integracion getCombo.server.fail" time="0.001" classname="getCombo.server.fail">
+    <testcase name="Combo Integracion getCombo.server.fail" time="0.000" classname="getCombo.server.fail">
     </testcase>
-    <testcase name="Combo Integracion getCombo.network.fail" time="0.000" classname="getCombo.network.fail">
+    <testcase name="Combo Integracion getCombo.network.fail" time="0.001" classname="getCombo.network.fail">
     </testcase>
     <testcase name="Combo Integracion showCombos.ok" time="0.023" classname="showCombos.ok">
     </testcase>
-    <testcase name="Combo Integracion showCombos.noContainer" time="0.001" classname="showCombos.noContainer">
+    <testcase name="Combo Integracion showCombos.noContainer" time="0.000" classname="showCombos.noContainer">
     </testcase>
-    <testcase name="Combo Integracion showCombos.emptyData.ok" time="0.000" classname="showCombos.emptyData.ok">
+    <testcase name="Combo Integracion showCombos.emptyData.ok" time="0.001" classname="showCombos.emptyData.ok">
     </testcase>
     <testcase name="Combo Integracion showCombos.fail" time="0.001" classname="showCombos.fail">
     </testcase>
   </testsuite>
-  <testsuite name="Combo" timestamp="2025-06-03T06:17:28" tests="5" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/ComboTest.js" time="0.011" failures="0">
+  <testsuite name="Combo" timestamp="2025-06-03T06:22:44" tests="5" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/ComboTest.js" time="0.011" failures="0">
     <testcase name="Combo getCombo.ok" time="0.000" classname="getCombo.ok">
     </testcase>
-    <testcase name="Combo getCombo.fail" time="0.000" classname="getCombo.fail">
+    <testcase name="Combo getCombo.fail" time="0.001" classname="getCombo.fail">
     </testcase>
     <testcase name="Combo showCombos.ok" time="0.003" classname="showCombos.ok">
     </testcase>
@@ -30,53 +30,53 @@
     <testcase name="Combo showCombos.fail" time="0.001" classname="showCombos.fail">
     </testcase>
   </testsuite>
-  <testsuite name="Main" timestamp="2025-06-03T06:17:28" tests="5" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/MainDTest.js" time="0.017" failures="0">
-    <testcase name="Main init.ok" time="0.002" classname="init.ok">
+  <testsuite name="Main" timestamp="2025-06-03T06:22:44" tests="5" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/MainDTest.js" time="0.016" failures="0">
+    <testcase name="Main init.ok" time="0.003" classname="init.ok">
     </testcase>
     <testcase name="Main init.null" time="0.000" classname="init.null">
     </testcase>
-    <testcase name="Main createBotonesOrden.ok" time="0.000" classname="createBotonesOrden.ok">
+    <testcase name="Main createBotonesOrden.ok" time="0.001" classname="createBotonesOrden.ok">
     </testcase>
     <testcase name="Main showMenu.productos.ok" time="0.003" classname="showMenu.productos.ok">
     </testcase>
     <testcase name="Main showMenu.combos.ok" time="0.002" classname="showMenu.combos.ok">
     </testcase>
   </testsuite>
-  <testsuite name="Main Integracion" timestamp="2025-06-03T06:17:28" tests="5" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/MainIT.js" time="0.031" failures="0">
-    <testcase name="Main Integracion init.ok" time="0.001" classname="init.ok">
+  <testsuite name="Main Integracion" timestamp="2025-06-03T06:22:44" tests="5" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/MainIT.js" time="0.031" failures="0">
+    <testcase name="Main Integracion init.ok" time="0.002" classname="init.ok">
     </testcase>
-    <testcase name="Main Integracion init.null" time="0.001" classname="init.null">
+    <testcase name="Main Integracion init.null" time="0.000" classname="init.null">
     </testcase>
-    <testcase name="Main Integracion createBotonesOrden.ok" time="0.000" classname="createBotonesOrden.ok">
+    <testcase name="Main Integracion createBotonesOrden.ok" time="0.001" classname="createBotonesOrden.ok">
     </testcase>
-    <testcase name="Main Integracion showMenu.productos.ok" time="0.012" classname="showMenu.productos.ok">
+    <testcase name="Main Integracion showMenu.productos.ok" time="0.011" classname="showMenu.productos.ok">
     </testcase>
-    <testcase name="Main Integracion showMenu.combos.ok" time="0.012" classname="showMenu.combos.ok">
+    <testcase name="Main Integracion showMenu.combos.ok" time="0.011" classname="showMenu.combos.ok">
     </testcase>
   </testsuite>
-  <testsuite name="Orden Integracion" timestamp="2025-06-03T06:17:28" tests="10" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/OrdenIT.js" time="0.017" failures="0">
+  <testsuite name="Orden Integracion" timestamp="2025-06-03T06:22:44" tests="10" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/OrdenIT.js" time="0.017" failures="0">
     <testcase name="Orden Integracion initOrden.ok" time="0.001" classname="initOrden.ok">
     </testcase>
     <testcase name="Orden Integracion cancelOrden.ok" time="0.001" classname="cancelOrden.ok">
     </testcase>
-    <testcase name="Orden Integracion estadoOrden.ok" time="0.001" classname="estadoOrden.ok">
+    <testcase name="Orden Integracion estadoOrden.ok" time="0.000" classname="estadoOrden.ok">
     </testcase>
-    <testcase name="Orden Integracion addProducto.ok" time="0.000" classname="addProducto.ok">
+    <testcase name="Orden Integracion addProducto.ok" time="0.001" classname="addProducto.ok">
     </testcase>
     <testcase name="Orden Integracion addProducto+.ok" time="0.000" classname="addProducto+.ok">
     </testcase>
-    <testcase name="Orden Integracion notificarCambio.ok" time="0.001" classname="notificarCambio.ok">
+    <testcase name="Orden Integracion notificarCambio.ok" time="0.000" classname="notificarCambio.ok">
     </testcase>
     <testcase name="Orden Integracion calcularTotal.ok" time="0.001" classname="calcularTotal.ok">
     </testcase>
     <testcase name="Orden Integracion confirmarOrden.ok" time="0.001" classname="confirmarOrden.ok">
     </testcase>
-    <testcase name="Orden Integracion confirmarOrden.server.fail" time="0.001" classname="confirmarOrden.server.fail">
+    <testcase name="Orden Integracion confirmarOrden.server.fail" time="0.000" classname="confirmarOrden.server.fail">
     </testcase>
     <testcase name="Orden Integracion confirmarOrden.network.fail" time="0.000" classname="confirmarOrden.network.fail">
     </testcase>
   </testsuite>
-  <testsuite name="Orden" timestamp="2025-06-03T06:17:28" tests="10" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/OrdenTest.js" time="0.015" failures="0">
+  <testsuite name="Orden" timestamp="2025-06-03T06:22:44" tests="10" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/OrdenTest.js" time="0.015" failures="0">
     <testcase name="Orden initOrden.ok" time="0.001" classname="initOrden.ok">
     </testcase>
     <testcase name="Orden cancelOrden.ok " time="0.001" classname="cancelOrden.ok ">
@@ -98,7 +98,7 @@
     <testcase name="Orden confirmarOrden.excepcion.fail" time="0.001" classname="confirmarOrden.excepcion.fail">
     </testcase>
   </testsuite>
-  <testsuite name="Pago Integracion" timestamp="2025-06-03T06:17:28" tests="7" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/PagoIT.js" time="0.008" failures="0">
+  <testsuite name="Pago Integracion" timestamp="2025-06-03T06:22:44" tests="7" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/PagoIT.js" time="0.008" failures="0">
     <testcase name="Pago Integracion confirmarPago.ok" time="0.002" classname="confirmarPago.ok">
     </testcase>
     <testcase name="Pago Integracion confirmarPago.server.fail" time="0.001" classname="confirmarPago.server.fail">
@@ -114,7 +114,7 @@
     <testcase name="Pago Integracion createPagoDetalle.network.fail" time="0.000" classname="createPagoDetalle.network.fail">
     </testcase>
   </testsuite>
-  <testsuite name="Pago" timestamp="2025-06-03T06:17:28" tests="5" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/PagoTest.js" time="0.006" failures="0">
+  <testsuite name="Pago" timestamp="2025-06-03T06:22:44" tests="5" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/PagoTest.js" time="0.006" failures="0">
     <testcase name="Pago confirmarPago.ok" time="0.001" classname="confirmarPago.ok">
     </testcase>
     <testcase name="Pago confirmarPago.fail" time="0.001" classname="confirmarPago.fail">
@@ -126,10 +126,10 @@
     <testcase name="Pago createPagoDetalle.fail" time="0.000" classname="createPagoDetalle.fail">
     </testcase>
   </testsuite>
-  <testsuite name="Producto Integracion" timestamp="2025-06-03T06:17:28" tests="6" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/ProductoIT.js" time="0.008" failures="0">
+  <testsuite name="Producto Integracion" timestamp="2025-06-03T06:22:44" tests="6" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/ProductoIT.js" time="0.008" failures="0">
     <testcase name="Producto Integracion getProductos.ok" time="0.000" classname="getProductos.ok">
     </testcase>
-    <testcase name="Producto Integracion getProductos.network.fail" time="0.000" classname="getProductos.network.fail">
+    <testcase name="Producto Integracion getProductos.network.fail" time="0.001" classname="getProductos.network.fail">
     </testcase>
     <testcase name="Producto Integracion getProductos.server.fail" time="0.000" classname="getProductos.server.fail">
     </testcase>
@@ -140,13 +140,13 @@
     <testcase name="Producto Integracion mostrarDetalles.ok" time="0.001" classname="mostrarDetalles.ok">
     </testcase>
   </testsuite>
-  <testsuite name="Producto" timestamp="2025-06-03T06:17:28" tests="2" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/ProductoTest.js" time="0.001" failures="0">
+  <testsuite name="Producto" timestamp="2025-06-03T06:22:44" tests="2" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/ProductoTest.js" time="0.001" failures="0">
     <testcase name="Producto getProductos.ok" time="0.000" classname="getProductos.ok">
     </testcase>
     <testcase name="Producto getProductos.fail" time="0.001" classname="getProductos.fail">
     </testcase>
   </testsuite>
-  <testsuite name="TipoProducto Integracion" timestamp="2025-06-03T06:17:28" tests="3" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/TipoProductoIT.js" time="0.001" failures="0">
+  <testsuite name="TipoProducto Integracion" timestamp="2025-06-03T06:22:44" tests="3" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/TipoProductoIT.js" time="0.002" failures="0">
     <testcase name="TipoProducto Integracion getTipoProducto.ok" time="0.000" classname="getTipoProducto.ok">
     </testcase>
     <testcase name="TipoProducto Integracion getTipoProducto.network.fail" time="0.000" classname="getTipoProducto.network.fail">
@@ -154,7 +154,7 @@
     <testcase name="TipoProducto Integracion getTipoProducto.server.fail" time="0.000" classname="getTipoProducto.server.fail">
     </testcase>
   </testsuite>
-  <testsuite name="TipoProducto" timestamp="2025-06-03T06:17:28" tests="2" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/TipoProductoTest.js" time="0.001" failures="0">
+  <testsuite name="TipoProducto" timestamp="2025-06-03T06:22:44" tests="2" file="/home/henri/Escritorio/TPI-frontend/PupasFE/test/js/control/TipoProductoTest.js" time="0.001" failures="0">
     <testcase name="TipoProducto getTipoProducto.ok " time="0.000" classname="getTipoProducto.ok ">
     </testcase>
     <testcase name="TipoProducto getTipoProducto.fail" time="0.000" classname="getTipoProducto.fail">
