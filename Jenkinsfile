@@ -11,19 +11,19 @@ pipeline {
             }
         }
 
+        stage('Limpiar contenedores previos') {
+            steps {
+                // Si ya existe, lo apaga y elimina
+                sh 'docker compose down || true'
+            }
+        }
+
         stage('Build y Test (Docker Compose)') {
             steps {
                 script {
-                    // Build los servicios y ejecuta los tests, luego apaga y elimina contenedores
-                    sh 'docker compose up --build -d' // Levanta en segundo plano
-                    // Espera un poco si tu contenedor necesita tiempo para "arrancar"
-                    // sh 'sleep 10'
-
-                    // Ejecutar tests dentro del contenedor principal (ajusta el nombre si es necesario)
-                    sh 'docker compose exec -T <nombre_servicio> npm test'
-
-                    // Apaga y elimina los contenedores, limpia imágenes y volúmenes temporales
-                    sh 'docker compose down'
+                    sh 'docker compose up --build -d'
+                    // Espera si es necesario: sh 'sleep 10'
+                    sh 'docker compose exec -T pupasfe npm test'
                 }
             }
         }
