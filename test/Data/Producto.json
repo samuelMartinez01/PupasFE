@@ -1,0 +1,92 @@
+[
+    {
+        "idProducto": 1,
+        "tipo": "Comida",
+        "idTipoProducto": 2,
+        "nombre": "Pupusa de queso",
+        "precioActual": 0.60,
+        "observaciones": null,
+        "activo": true
+    },
+    {
+        "idProducto": 2,
+        "tipo": "Comida",
+        "idTipoProducto": 2,
+        "nombre": "Pupusa de loroco",
+        "precioActual": 0.60,
+        "observaciones": null,
+        "activo": true
+    },
+    {
+        "idProducto": 3,
+        "tipo": "Comida",
+        "idTipoProducto": 2,
+        "nombre": "Pupusa revuelta",
+        "precioActual": 0.60,
+        "observaciones": null,
+        "activo": true
+    },
+    {
+        "idProducto": 4,
+        "tipo": "Comida",
+        "idTipoProducto": 2,
+        "nombre": "Pupusa de frijol con queso",
+        "precioActual": 0.60,
+        "observaciones": null,
+        "activo": true
+    },
+    {
+        "idProducto": 5,
+        "tipo": "Comida",
+        "idTipoProducto": 2,
+        "nombre": "Pupusa de jalapeño",
+        "precioActual": 0.60,
+        "observaciones": null,
+        "activo": true
+    },
+    {
+        "idProducto": 6,
+        "tipo": "Sin tipo",
+        "idTipoProducto": null,
+        "nombre": "Pupusa loca",
+        "precioActual": 0.60,
+        "observaciones": null,
+        "activo": false
+    },
+    {
+        "idProducto": 7,
+        "tipo": "Bebidas",
+        "idTipoProducto": 1,
+        "nombre": "Coca cola",
+        "precioActual": 0.75,
+        "observaciones": null,
+        "activo": true
+    },
+    {
+        "idProducto": 8,
+        "tipo": "Sin tipo",
+        "idTipoProducto": null,
+        "nombre": "Prueba",
+        "precioActual": 0,
+        "observaciones": "Hola",
+        "activo": true
+    },
+    {
+        "idProducto": 9,
+        "tipo": "Bebidas",
+        "idTipoProducto": 1,
+        "nombre": "Del valle",
+        "precioActual": 0,
+        "observaciones": null,
+        "activo": true
+    },
+    {
+        "idProducto": 10,
+        "tipo": "Alcohol",
+        "idTipoProducto": 4,
+        "nombre": "Cerveza",
+        "precioActual": 1.25,
+        "observaciones": null,
+        "activo": true
+    }
+]

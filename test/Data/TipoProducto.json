@@ -1,0 +1,26 @@
+[
+    {
+        "idTipoProducto": 1,
+        "nombre": "Bebidas",
+        "activo": true,
+        "observaciones": null
+    },
+    {
+        "idTipoProducto": 2,
+        "nombre": "Comida",
+        "activo": true,
+        "observaciones": null
+    },
+    {
+        "idTipoProducto": 3,
+        "nombre": "Tipicos",
+        "activo": true,
+        "observaciones": null
+    },
+    {
+        "idTipoProducto": 4,
+        "nombre": "Alcohol",
+        "activo": true,
+        "observaciones": "+18"
+    }
+]

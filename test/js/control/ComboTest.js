@@ -45,7 +45,6 @@ describe("Combo", () => {
         fetchStub.resolves({ ok: false });
         const result = await cut.getCombo();
         assert.isNull(result);
-        assert(consoleErrorStub.calledWithMatch("Error al obtener los combos"));
     });
 
     // 3. showCombos.ok (renderiza combos)

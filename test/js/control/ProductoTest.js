@@ -3,7 +3,7 @@ import sinon from "sinon";
 import Producto from "../../../src/js/Control/Producto.js";
 
 
-describe("Producto", () => { 
+describe("Producto.getProductos", () => { 
     let cut; 
     let fetch;
 
@@ -43,3 +43,5 @@ describe("Producto", () => {
         fakeConsole.restore();
     });
 });
+
+

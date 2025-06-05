@@ -1,0 +1,19 @@
+{
+    "idOrden": 10,
+    "fecha": 1747202400000,
+    "sucursal": "TEST",
+    "anulada": false,
+    "detalles": [
+        {
+            "idProductoPrecio": 1,
+            "idProducto": 1,
+            "nombreProducto": "Pupusa de queso",
+            "cantidad": 3,
+            "precioUnitario": 0.60,
+            "observaciones": null
+        }
+    ],
+    "total": 1.80,
+    "pagos": [],
+    "productos": null
+}

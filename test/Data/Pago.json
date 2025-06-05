@@ -1,0 +1,12 @@
+{
+    "idPago": 11,
+    "fecha": 1747548000000,
+    "metodoPago": "EFECTIVO",
+    "referencia": "PAGO-1747595177745",
+    "idOrden": {
+        "idOrden": 10,
+        "fecha": 1747548000000,
+        "sucursal": "TEST",
+        "anulada": false
+    }
+}

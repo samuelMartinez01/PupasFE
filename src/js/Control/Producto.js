@@ -5,20 +5,24 @@ class Producto extends DataAccess {
     constructor() {
         super();
     }
-    async getProductos(idTipoProducto) {
-        try {
-            const response = await fetch(this.BASE_URL + `producto/tipoproducto/${idTipoProducto}`, { method: "GET" });
-           if (response.ok){
-                const productos = await response.json();
-                return productos;
-            } else {
-                throw new Error(`Error http: ${response.status}`);
-            }
-        } catch (error) {
-            console.error(`No se obtuvieron productos del  tipo ${idTipoProducto}:`, error);
-            return null;
-        }
+
+    getProductos(idTipoProducto) {
+        const productos =  fetch(this.BASE_URL + `producto/tipoproducto/${idTipoProducto}`, 
+            { method: "GET" })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error(`HTTP Error: ${response.status}`);
+                }
+            })
+            .catch(error => {
+                console.error(`No se obtuvieron productos del tipo ${idTipoProducto}:`, error);
+                return null;
+            });
+        return productos;
     }
+
 
     showProductos(productos, idTipoProducto) {
          //Contenedor principal que contiene los productos desplegados
@@ -57,12 +61,6 @@ class Producto extends DataAccess {
                 orden.addProducto(productoData);
             });
         });
-    }
-
-    mostrarDetalles(idTipoProducto) {
-        const idContenedor = idTipoProducto === "0" ? 'detalles-combos' : `detalles-${idTipoProducto}`;
-        const contenedor = document.getElementById(idContenedor);
-        contenedor.style.display = contenedor.style.display === 'none' ? 'block' : 'none';
     }
 }
 

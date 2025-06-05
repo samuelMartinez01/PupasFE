@@ -6,16 +6,23 @@ class Combo extends DataAccess {
         super();
     }
 
-    async getCombo() {
-        try {
-            const response = await fetch(this.BASE_URL + "combo", { method: "GET" });
-            if (!response.ok) throw new Error("Error en la respuesta de la API");
-            return await response.json();
-        } catch (error) {
-            console.error("Error al obtener los combos:", error);
-            return null;
-        }
+    getCombo() {
+        const productos = fetch(this.BASE_URL + "combo",
+            { method: "GET" })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error(`HTTP Error: ${response.status}`);
+                }
+            })
+            .catch(error => {
+                console.error(`No se obtuvieron combos:`, error);
+                return null;
+            });
+        return productos;
     }
+
 
     async showCombos() {
         const detallesContainer = document.getElementById('detalles-combos');
@@ -31,7 +38,7 @@ class Combo extends DataAccess {
                 return;
             }
 
-            detallesContainer.innerHTML = ''; // Limpiar contenedor
+            detallesContainer.innerHTML = '';
 
             combosData.forEach(combo => {
                 const comboCard = document.createElement('div');

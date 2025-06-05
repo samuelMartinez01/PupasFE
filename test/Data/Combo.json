@@ -1,0 +1,108 @@
+[
+    {
+        "idCombo": 1,
+        "nombre": "Cena personal",
+        "activo": true,
+        "descripcionPublica": null,
+        "productos": [
+            {
+                "idProducto": 2,
+                "nombre": "Pupusa de loroco",
+                "precioUnitario": 0.60,
+                "cantidad": 3,
+                "precioTotal": 1.80
+            },
+            {
+                "idProducto": 7,
+                "nombre": "Coca cola",
+                "precioUnitario": 0.75,
+                "cantidad": 2,
+                "precioTotal": 1.50
+            }
+        ],
+        "precioTotal": 3.30
+    },
+    {
+        "idCombo": 2,
+        "nombre": "Cena familiar",
+        "activo": true,
+        "descripcionPublica": "Para 6 personas",
+        "productos": [
+            {
+                "idProducto": 4,
+                "nombre": "Pupusa de frijol con queso",
+                "precioUnitario": 0.60,
+                "cantidad": 6,
+                "precioTotal": 3.60
+            },
+            {
+                "idProducto": 6,
+                "nombre": "Pupusa loca",
+                "precioUnitario": 0.60,
+                "cantidad": 3,
+                "precioTotal": 1.80
+            },
+            {
+                "idProducto": 6,
+                "nombre": "Pupusa loca",
+                "precioUnitario": 0.99,
+                "cantidad": 3,
+                "precioTotal": 2.97
+            },
+            {
+                "idProducto": 10,
+                "nombre": "Cerveza",
+                "precioUnitario": 1.25,
+                "cantidad": 6,
+                "precioTotal": 7.50
+            }
+        ],
+        "precioTotal": 15.87
+    },
+    {
+        "idCombo": 3,
+        "nombre": " Combo Love",
+        "activo": true,
+        "descripcionPublica": "Cena para dos",
+        "productos": [
+            {
+                "idProducto": 1,
+                "nombre": "Pupusa de queso",
+                "precioUnitario": 0.60,
+                "cantidad": 3,
+                "precioTotal": 1.80
+            },
+            {
+                "idProducto": 5,
+                "nombre": "Pupusa de jalapeño",
+                "precioUnitario": 0.60,
+                "cantidad": 3,
+                "precioTotal": 1.80
+            },
+            {
+                "idProducto": 10,
+                "nombre": "Cerveza",
+                "precioUnitario": 1.25,
+                "cantidad": 4,
+                "precioTotal": 5.00
+            }
+        ],
+        "precioTotal": 8.60
+    },
+    {
+        "idCombo": 4,
+        "nombre": "test",
+        "activo": true,
+        "descripcionPublica": "test",
+        "productos": [
+            {
+                "idProducto": 10,
+                "nombre": "Cerveza",
+                "precioUnitario": 1.25,
+                "cantidad": 1,
+                "precioTotal": 1.25
+            }
+        ],
+        "precioTotal": 1.25
+    }
+]

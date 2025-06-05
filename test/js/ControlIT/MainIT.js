@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import sinon from "sinon";
 import createJSDOM from "global-jsdom";
-createJSDOM(); // Simula DOM
+createJSDOM();
 
 import Main from "../../../src/js/Control/Main.js";
 import * as ordenModule from "../../../src/js/Control/Orden.js";
@@ -11,12 +11,12 @@ describe("Main Integracion", () => {
     let getTipoProductoStub, getComboStub, getProductosStub, showProductosStub, showCombosStub, initPagoStub;
 
     beforeEach(() => {
-        document.body.innerHTML = ""; // Limpiar DOM
+        document.body.innerHTML = ""; 
         const container = document.createElement("div");
         container.id = "main-container";
         document.body.appendChild(container);
 
-        // Crear stubs para métodos de las clases inyectadas
+
         getTipoProductoStub = sinon.stub().resolves([
             { idTipoProducto: 1, nombre: "Bebidas", observaciones: "" }
         ]);
@@ -59,7 +59,7 @@ describe("Main Integracion", () => {
         assert(getTipoProductoStub.calledOnce);
         assert(getComboStub.calledOnce);
         const botones = document.querySelectorAll(".tipoproducto-card");
-        assert.lengthOf(botones, 2); // 1 tipo + 1 combo
+        assert.lengthOf(botones, 2); 
     });
 
     it("init.null", async () => {

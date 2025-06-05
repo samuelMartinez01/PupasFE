@@ -16,7 +16,7 @@ describe("TipoProducto", () => { //Nombre del test
     });
     //Restaura fetch a su versión original 
     afterEach(() => {
-        fetch.restore();
+        sinon.restore();
     });
     //Test 1
     it("getTipoProducto.ok ", async () => {
@@ -45,6 +45,5 @@ describe("TipoProducto", () => { //Nombre del test
         const result = await cut.getTipoProducto();
         assert.isNull(result);
         assert.isTrue(fakeConsole.calledOnce);//console.error fue llamado una vez?
-        fakeConsole.restore();
     });
 });
